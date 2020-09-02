@@ -1,9 +1,11 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.lib.Dao;
 import core.basesyntax.models.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
 
+@Dao
 public interface ShoppingCartDao {
     ShoppingCart create(ShoppingCart shoppingCart);
 
