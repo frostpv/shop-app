@@ -2,8 +2,7 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.db.Storage;
-import core.basesyntax.models.Product;
-
+import core.basesyntax.models.Product; 
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +26,19 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-       get(product.getId())
-               .ifPresent(product1 -> product1 = product);
-       return product;
+        if (get(product.getId()).isPresent()) {
+            Product product1 = get(product.getId()).get();
+            product1.setName(product.getName());
+            product1.setPrice(product.getPrice());
+            return product1;
+        }
+        throw new RuntimeException();
     }
 
     @Override
     public boolean delete(Long id) {
-       return true;
+        Product product = get(id).get();
+        Storage.products.remove(product);
+        return true;
     }
 }
