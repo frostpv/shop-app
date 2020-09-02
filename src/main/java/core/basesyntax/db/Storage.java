@@ -17,11 +17,12 @@ public class Storage {
     public static List<ShoppingCart> shoppingCarts = new ArrayList<>();
     public static List<User> users = new ArrayList<>();
 
-    public static void addProduct(Product product) {
+    public static Product addProduct(Product product) {
         if (isNotNull(product)) {
             product.setId(++productId);
             products.add(product);
         }
+        return product;
     }
 
     public static void addOrder(Order order) {
