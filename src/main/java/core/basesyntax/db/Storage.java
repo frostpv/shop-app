@@ -18,26 +18,34 @@ public class Storage {
     public static List<User> users = new ArrayList<>();
 
     public static void addProduct(Product product) {
-        productId++;
-        product.setId(productId);
-        products.add(product);
+        if (isNotNull(product)) {
+            product.setId(++productId);
+            products.add(product);
+        }
     }
 
     public static void addOrder(Order order) {
-        orderId++;
-        order.setId(orderId);
-        orders.add(order);
+        if (isNotNull(order)) {
+            order.setId(++orderId);
+            orders.add(order);
+        }
     }
 
     public static void addCart(ShoppingCart shoppingCart) {
-        shoppingCardId++;
-        shoppingCart.setId(shoppingCardId);
-        shoppingCarts.add(shoppingCart);
+        if (isNotNull(shoppingCart)) {
+            shoppingCart.setId(++shoppingCardId);
+            shoppingCarts.add(shoppingCart);
+        }
     }
 
     public static void addUser(User user) {
-        userId++;
-        user.setId(userId);
-        users.add(user);
+        if (isNotNull(user)) {
+            user.setId(++userId);
+            users.add(user);
+        }
+    }
+
+    private static boolean isNotNull(Object object) {
+        return object != null;
     }
 }
