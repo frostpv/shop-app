@@ -1,13 +1,13 @@
 package core.basesyntax.factory;
 
-import core.basesyntax.dao.OrderDao;
-import core.basesyntax.dao.ProductDao;
-import core.basesyntax.dao.ShoppingCartDao;
-import core.basesyntax.dao.UserDao;
-import core.basesyntax.dao.impl.OrderDaoImpl;
-import core.basesyntax.dao.impl.ProductDaoImpl;
-import core.basesyntax.dao.impl.ShoppingCartDaoImpl;
-import core.basesyntax.dao.impl.UserDaoImpl;
+import com.internet.shop.dao.OrderDao;
+import com.internet.shop.dao.ProductDao;
+import com.internet.shop.dao.ShoppingCartDao;
+import com.internet.shop.dao.UserDao;
+import com.internet.shop.dao.OrderDaoImpl;
+import com.internet.shop.dao.ProductDaoImpl;
+import com.internet.shop.dao.ShoppingCartDaoImpl;
+import com.internet.shop.dao.UserDaoImpl;
 
 public class Factory {
     private static OrderDao order;

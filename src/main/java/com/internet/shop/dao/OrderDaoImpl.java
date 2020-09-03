@@ -1,8 +1,9 @@
-package core.basesyntax.dao.impl;
+package com.internet.shop.dao;
 
-import core.basesyntax.dao.OrderDao;
-import core.basesyntax.lib.Dao;
-import core.basesyntax.models.Order;
+import com.internet.shop.dao.OrderDao;
+import com.internet.shop.lib.Dao;
+import com.internet.shop.models.Order;
+
 import java.util.List;
 import java.util.Optional;
 

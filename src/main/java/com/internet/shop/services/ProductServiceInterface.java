@@ -1,6 +1,7 @@
-package core.basesyntax.services;
+package com.internet.shop.services;
 
-import core.basesyntax.models.Product;
+import com.internet.shop.models.Product;
+
 import java.util.List;
 
 public interface ProductServiceInterface {

@@ -1,9 +1,10 @@
-package core.basesyntax.dao.impl;
+package com.internet.shop.dao;
 
-import core.basesyntax.dao.ProductDao;
-import core.basesyntax.db.Storage;
-import core.basesyntax.lib.Dao;
-import core.basesyntax.models.Product;
+import com.internet.shop.dao.ProductDao;
+import com.internet.shop.db.Storage;
+import com.internet.shop.lib.Dao;
+import com.internet.shop.models.Product;
+
 import java.util.List;
 import java.util.Optional;
 

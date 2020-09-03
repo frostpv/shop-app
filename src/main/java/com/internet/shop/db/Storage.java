@@ -1,9 +1,10 @@
-package core.basesyntax.db;
+package com.internet.shop.db;
 
-import core.basesyntax.models.Order;
-import core.basesyntax.models.Product;
-import core.basesyntax.models.ShoppingCart;
-import core.basesyntax.models.User;
+import com.internet.shop.models.Order;
+import com.internet.shop.models.Product;
+import com.internet.shop.models.ShoppingCart;
+import com.internet.shop.models.User;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package core.basesyntax.models;
+package com.internet.shop.models;
 
 public class User {
     private long id;

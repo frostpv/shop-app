@@ -1,16 +1,16 @@
-package core.basesyntax.models;
+package com.internet.shop.models;
 
 import java.util.List;
 
-public class ShoppingCart {
+public class Order {
     private long id;
     private List<Product> products;
-    private long userId;
+    private long idUser;
 
-    public ShoppingCart(long id, List<Product> products, long userId) {
+    public Order(long id, List<Product> products, long idUser) {
         this.id = id;
         this.products = products;
-        this.userId = userId;
+        this.idUser = idUser;
     }
 
     public long getId() {
@@ -29,11 +29,11 @@ public class ShoppingCart {
         this.products = products;
     }
 
-    public long getUserId() {
-        return userId;
+    public long getIdUser() {
+        return idUser;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
     }
 }

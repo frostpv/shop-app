@@ -1,6 +1,7 @@
-package core.basesyntax.dao;
+package com.internet.shop.dao;
 
-import core.basesyntax.models.User;
+import com.internet.shop.models.User;
+
 import java.util.List;
 import java.util.Optional;
 

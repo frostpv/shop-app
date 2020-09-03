@@ -1,11 +1,12 @@
-package core.basesyntax;
+package com.internet.shop;
+
 import com.internet.shop.lib.Injector;
 import com.internet.shop.models.Product;
 import com.internet.shop.services.ProductServiceInterface;
 
-public class ShopApp {
+public class WebShopApp {
     public static void main(String[] args) {
-        ProductServiceInterface productService = (ProductServiceInterface) Injector.getInstance("shop-app")
+        ProductServiceInterface productService = (ProductServiceInterface) Injector.getInstance("com.internet.shop")
                 .getInstance(ProductServiceInterface.class);
 
 
