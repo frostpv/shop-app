@@ -1,9 +1,7 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.dao.OrderDao;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Order;
-
 import java.util.List;
 import java.util.Optional;
 

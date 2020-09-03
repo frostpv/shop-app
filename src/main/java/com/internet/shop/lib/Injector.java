@@ -1,4 +1,5 @@
 package com.internet.shop.lib;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -13,7 +14,6 @@ import java.util.Map;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
-
     private Map<Class, Object> instanceOfClasses = new HashMap<>();
     private List<Class> classes = new ArrayList<>();
 

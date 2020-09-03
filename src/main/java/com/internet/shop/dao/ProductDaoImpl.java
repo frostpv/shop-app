@@ -1,10 +1,8 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.dao.ProductDao;
 import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Product;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +39,6 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public boolean delete(Long id) {
         return Storage.products
-                .removeIf(product -> product.getId()==id);
+                .removeIf(product -> product.getId() == id);
     }
 }

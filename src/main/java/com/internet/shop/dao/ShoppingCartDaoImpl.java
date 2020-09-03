@@ -1,9 +1,7 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.dao.ShoppingCartDao;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.ShoppingCart;
-
 import java.util.List;
 import java.util.Optional;
 

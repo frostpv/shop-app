@@ -4,7 +4,6 @@ import com.internet.shop.dao.ProductDao;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.models.Product;
-
 import java.util.List;
 
 @Service

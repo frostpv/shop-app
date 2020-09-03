@@ -1,7 +1,6 @@
 package com.internet.shop.dao;
 
 import com.internet.shop.models.User;
-
 import java.util.List;
 import java.util.Optional;
 
