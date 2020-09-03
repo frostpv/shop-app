@@ -27,12 +27,13 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-        return Storage.products.stream()
-                .filter(productFromStorage -> productFromStorage.getId() == (product.getId()))
-                .limit(1)
-                .peek(x -> x = product)
-                .findFirst()
-                .orElseThrow();
+        for (Product prod : Storage.products) {
+            if (prod.getId() == product.getId()) {
+                Storage.products.set(Storage.products.indexOf(prod), product);
+                return prod;
+            }
+        }
+        throw new RuntimeException("Product is not exist in database");
     }
 
     @Override
