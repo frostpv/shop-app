@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductServiceInterface {
     @Inject
-    ProductDao productDao;
+    private ProductDao productDao;
 
     @Override
     public Product create(Product product) {
