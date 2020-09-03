@@ -1,7 +1,7 @@
 package com.internet.shop.models;
 
 public class User {
-    private long id;
+    private Long id;
     private String name;
     private String login;
     private String password;

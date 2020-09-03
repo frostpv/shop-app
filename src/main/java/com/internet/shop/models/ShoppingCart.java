@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    private long id;
+    private Long id;
     private List<Product> products;
-    private long userId;
+    private Long userId;
 
     public ShoppingCart() {
         this.products = new ArrayList<>();

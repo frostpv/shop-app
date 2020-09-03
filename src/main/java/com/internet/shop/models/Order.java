@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private long id;
+    private Long id;
     private List<Product> products;
-    private long idUser;
+    private Long idUser;
 
     public Order() {
         this.products = new ArrayList<>();
