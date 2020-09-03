@@ -1,10 +1,12 @@
 package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.ShoppingCartDao;
+import core.basesyntax.lib.Dao;
 import core.basesyntax.models.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
 
+@Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {

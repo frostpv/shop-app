@@ -1,10 +1,12 @@
 package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.UserDao;
+import core.basesyntax.lib.Dao;
 import core.basesyntax.models.User;
 import java.util.List;
 import java.util.Optional;
 
+@Dao
 public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {

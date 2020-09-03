@@ -1,17 +1,25 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.impl.ProductDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.models.Product;
+import core.basesyntax.services.ProductServiceInterface;
+import core.basesyntax.services.impl.ProductServiceImpl;
+
+import java.security.Provider;
 
 public class ShopApp {
     public static void main(String[] args) {
-        Product product = new Product(0,"fhone", 5.5);
 
-        Storage.addProduct(product);
-        Storage.addProduct(null);
-        Storage.addProduct(product);
+        ProductDao productDao = new ProductDaoImpl();
 
-        System.out.println(Storage.products.size());
-        System.out.println(Storage.products.get(Storage.products.size()-1).getId());
+
+
+        productDao.create(new Product("soft", 5.5));
+        System.out.println(productDao.getAll());
+
+        System.out.println(productDao.getAll());
+
     }
 }

@@ -1,10 +1,12 @@
 package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.OrderDao;
+import core.basesyntax.lib.Dao;
 import core.basesyntax.models.Order;
 import java.util.List;
 import java.util.Optional;
 
+@Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
     public Order create(Order order) {

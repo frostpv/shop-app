@@ -1,11 +1,9 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.lib.Dao;
 import core.basesyntax.models.Product;
 import java.util.List;
 import java.util.Optional;
 
-@Dao
 public interface ProductDao {
     Product create(Product product);
 
