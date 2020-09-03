@@ -1,5 +1,6 @@
 package com.internet.shop.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -7,9 +8,9 @@ public class Order {
     private List<Product> products;
     private long idUser;
 
-    public Order(long id, List<Product> products, long idUser) {
+    public Order(long id, long idUser) {
         this.id = id;
-        this.products = products;
+        this.products = new ArrayList<>();
         this.idUser = idUser;
     }
 

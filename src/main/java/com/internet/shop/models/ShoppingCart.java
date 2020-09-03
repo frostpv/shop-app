@@ -1,5 +1,6 @@
 package com.internet.shop.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
@@ -7,9 +8,9 @@ public class ShoppingCart {
     private List<Product> products;
     private long userId;
 
-    public ShoppingCart(long id, List<Product> products, long userId) {
+    public ShoppingCart(long id, long userId) {
         this.id = id;
-        this.products = products;
+        this.products = new ArrayList<>();
         this.userId = userId;
     }
 
