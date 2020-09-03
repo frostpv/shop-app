@@ -8,10 +8,8 @@ public class ShoppingCart {
     private List<Product> products;
     private long userId;
 
-    public ShoppingCart(long id, long userId) {
-        this.id = id;
+    public ShoppingCart() {
         this.products = new ArrayList<>();
-        this.userId = userId;
     }
 
     public long getId() {
