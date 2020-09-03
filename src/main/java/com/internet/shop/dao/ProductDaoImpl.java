@@ -30,8 +30,7 @@ public class ProductDaoImpl implements ProductDao {
         return Storage.products.stream()
                 .filter(productFromStorage -> productFromStorage.getId() == (product.getId()))
                 .limit(1)
-                .peek(x -> x.setPrice(product.getPrice()))
-                .peek(x -> x.setName(product.getName()))
+                .peek(x -> x = product)
                 .findFirst()
                 .orElseThrow();
     }
