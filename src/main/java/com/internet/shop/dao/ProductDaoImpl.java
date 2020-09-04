@@ -3,6 +3,7 @@ package com.internet.shop.dao;
 import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Product;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Optional<Product> get(Long id) {
         return Storage.products.stream()
-                .filter(product -> product.getId() == id)
+                .filter(product -> id.equals(product.getId()))
                 .findFirst();
     }
 
@@ -39,6 +40,6 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public boolean delete(Long id) {
         return Storage.products
-                .removeIf(product -> product.getId() == id);
+                .removeIf(product -> id.equals(product.getId()));
     }
 }
