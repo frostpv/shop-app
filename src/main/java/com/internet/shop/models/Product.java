@@ -10,7 +10,7 @@ public class Product {
         this.price = price;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
