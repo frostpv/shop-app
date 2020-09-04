@@ -29,7 +29,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product update(Product product) {
         for (Product prod : Storage.products) {
-            if (prod.getId() == product.getId()) {
+            if (prod.getId().equals(product.getId())) {
                 Storage.products.set(Storage.products.indexOf(prod), product);
                 return prod;
             }
