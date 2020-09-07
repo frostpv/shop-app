@@ -8,8 +8,9 @@ public class Order {
     private List<Product> products;
     private Long idUser;
 
-    public Order() {
+    public Order(Long idUser) {
         this.products = new ArrayList<>();
+        this.idUser = idUser;
     }
 
     public Long getId() {
