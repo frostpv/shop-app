@@ -34,7 +34,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
                 return scrd;
             }
         }
-        throw new RuntimeException("Cart is not exist in database");
+        throw new RuntimeException("Cart does not exist in database");
     }
 
     @Override
