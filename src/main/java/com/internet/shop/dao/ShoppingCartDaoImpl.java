@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Dao
-public class ShoppingCartImpl implements ShoppingCartDao {
+public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
