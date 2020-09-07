@@ -35,4 +35,12 @@ public class Order {
     public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" + "id="
+                + id + ", products="
+                + products + ", idUser="
+                + idUser + '}';
+    }
 }
