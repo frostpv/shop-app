@@ -28,7 +28,7 @@ public class ShoppingCart {
         this.products = products;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
