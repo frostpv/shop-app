@@ -12,7 +12,7 @@ public class Order {
         this.products = new ArrayList<>();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

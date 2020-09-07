@@ -1,35 +1,45 @@
 package com.internet.shop.dao;
 
+import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Order;
-import com.internet.shop.models.ShoppingCart;
-
 import java.util.List;
+import java.util.Optional;
 
 @Dao
-public class OrderDaoImpl implements OrderDao{
+public class OrderDaoImpl implements OrderDao {
+
     @Override
-    public Order completeOrder(ShoppingCart shoppingCart) {
-        return null;
+    public Order create(Order order) {
+        return Storage.addOrder(order);
     }
 
     @Override
-    public List<Order> getUserOrders(Long userId) {
-        return null;
-    }
-
-    @Override
-    public Order get(Long id) {
-        return null;
+    public Optional<Order> get(Long id) {
+        return Storage.orders.stream()
+                .filter(order -> id.equals(order.getId()))
+                .findFirst();
     }
 
     @Override
     public List<Order> getAll() {
-        return null;
+        return Storage.orders;
+    }
+
+    @Override
+    public Order update(Order order) {
+        for (Order or : Storage.orders) {
+            if (or.getId().equals(order.getId())) {
+                Storage.orders.set(Storage.orders.indexOf(or), order);
+                return or;
+            }
+        }
+        throw new RuntimeException("Order is not exist in database");
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return Storage.orders
+                .removeIf(order -> id.equals(order.getId()));
     }
 }
