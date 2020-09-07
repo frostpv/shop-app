@@ -15,7 +15,7 @@ public class Storage {
     private static long productId = 0;
     private static long userId = 0;
     private static long orderId = 0;
-    private static long shopingCartId = 0;
+    private static long shoppingCartId = 0;
 
     public static Product addProduct(Product product) {
         if (isNotNull(product)) {
@@ -43,7 +43,7 @@ public class Storage {
 
     public static ShoppingCart addShopingCart(ShoppingCart shoppingCart) {
         if (isNotNull(shoppingCart)) {
-            shoppingCart.setId(++shopingCartId);
+            shoppingCart.setId(++shoppingCartId);
             shoppingCarts.add(shoppingCart);
         }
         return shoppingCart;

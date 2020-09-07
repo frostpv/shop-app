@@ -12,7 +12,7 @@ public class ShoppingCart {
         this.products = new ArrayList<>();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

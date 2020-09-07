@@ -1,37 +1,45 @@
 package com.internet.shop.dao;
 
+import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
-import com.internet.shop.models.Product;
+import com.internet.shop.models.ShoppingCart;
+import java.util.List;
+import java.util.Optional;
 
 @Dao
-public class ShoppingCartImpl implements ShoppingCart {
+public class ShoppingCartImpl implements ShoppingCartDao {
+
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
-        return null;
+        return Storage.addShopingCart(shoppingCart);
     }
 
     @Override
-    public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        return null;
+    public Optional<ShoppingCart> get(Long id) {
+        return Storage.shoppingCarts.stream()
+                .filter(shoppingCart -> id.equals(shoppingCart.getId()))
+                .findFirst();
     }
 
     @Override
-    public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        return false;
+    public List<ShoppingCart> getAll() {
+        return Storage.shoppingCarts;
     }
 
     @Override
-    public void clear(ShoppingCart shoppingCart) {
-
+    public ShoppingCart update(ShoppingCart shoppingCart) {
+        for (ShoppingCart scrd : Storage.shoppingCarts) {
+            if (scrd.getId().equals(shoppingCart.getId())) {
+                Storage.shoppingCarts.set(Storage.shoppingCarts.indexOf(scrd), shoppingCart);
+                return scrd;
+            }
+        }
+        throw new RuntimeException("Cart is not exist in database");
     }
 
     @Override
-    public ShoppingCart getByUserId(Long userId) {
-        return null;
-    }
-
-    @Override
-    public boolean delete(ShoppingCart shoppingCart) {
-        return false;
+    public boolean delete(Long id) {
+        return Storage.shoppingCarts
+                .removeIf(shoppingCart -> id.equals(shoppingCart.getId()));
     }
 }
