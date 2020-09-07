@@ -47,7 +47,7 @@ public class ShoppingCartServiseImpl implements ShoppingCartServiceIntercace {
                 .stream()
                 .filter(cart -> cart.getUserId().equals(userId))
                 .findFirst()
-                .orElseThrow();
+                .get();
     }
 
     @Override

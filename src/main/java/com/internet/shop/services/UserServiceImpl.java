@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserServiceInterface {
     public User get(Long id) {
         return userDao
                 .get(id)
-                .orElseThrow();
+                .get();
     }
 
     @Override
