@@ -1,34 +1,44 @@
 package com.internet.shop.dao;
 
+import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.User;
-
 import java.util.List;
+import java.util.Optional;
 
 @Dao
 public class UserDaoImpl implements UserDao{
     @Override
     public User create(User user) {
-        return null;
+        return Storage.addUser(user);
     }
 
     @Override
-    public User get(Long id) {
-        return null;
+    public Optional<User> get(Long id) {
+        return Storage.users.stream()
+                .filter(product -> id.equals(product.getId()))
+                .findFirst();
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return Storage.users;
     }
 
     @Override
     public User update(User user) {
-        return null;
+        for (User usr : Storage.users) {
+            if (usr.getId().equals(user.getId())) {
+                Storage.users.set(Storage.users.indexOf(usr), user);
+                return user;
+            }
+        }
+        throw new RuntimeException("User is not exist in database");
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return Storage.users
+                .removeIf(user -> id.equals(user.getId()));
     }
 }
