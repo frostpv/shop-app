@@ -38,7 +38,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartServiceIntercace {
 
     @Override
     public ShoppingCart getByUserId(Long userId) {
-        return shoppingCartDao.get(userId).get();
+        return shoppingCartDao.get(userId).orElseThrow();
     }
 
     @Override
