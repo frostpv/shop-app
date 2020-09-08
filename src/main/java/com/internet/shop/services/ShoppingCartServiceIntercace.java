@@ -10,7 +10,7 @@ public interface ShoppingCartServiceIntercace {
 
     boolean deleteProduct(ShoppingCart shoppingCart, Product product);
 
-    void clear(ShoppingCart shoppingCart); //remove all products from the shoppingCart
+    void clear(ShoppingCart shoppingCart);
 
     ShoppingCart getByUserId(Long userId);
 
