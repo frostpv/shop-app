@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderServiceInterface {
 
     @Inject
-    OrderDao orderDao;
+    private OrderDao orderDao;
 
     @Inject
-    ShoppingCartServiceIntercace shoppingCartService;
+    private ShoppingCartServiceIntercace shoppingCartService;
 
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {

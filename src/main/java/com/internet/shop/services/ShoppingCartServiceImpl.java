@@ -10,7 +10,7 @@ import com.internet.shop.models.ShoppingCart;
 public class ShoppingCartServiceImpl implements ShoppingCartServiceIntercace {
 
     @Inject
-    ShoppingCartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
