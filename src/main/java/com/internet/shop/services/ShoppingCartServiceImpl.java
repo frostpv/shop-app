@@ -25,14 +25,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartServiceIntercace {
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        for (Product prod : shoppingCart.getProducts()) {
-            if (prod.getId().equals(product.getId())) {
-                shoppingCart.getProducts().set(shoppingCart.getProducts().indexOf(prod), product);
-                shoppingCartDao.update(shoppingCart);
-                return true;
-            }
-        }
-        return false;
+        boolean result = shoppingCart.getProducts().remove(product);
+        shoppingCartDao.update(shoppingCart);
+        return result;
     }
 
     @Override
