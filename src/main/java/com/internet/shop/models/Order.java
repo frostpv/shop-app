@@ -29,7 +29,7 @@ public class Order {
         this.products = products;
     }
 
-    public long getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
