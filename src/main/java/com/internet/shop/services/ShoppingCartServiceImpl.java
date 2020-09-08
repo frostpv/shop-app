@@ -38,11 +38,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartServiceIntercace {
 
     @Override
     public ShoppingCart getByUserId(Long userId) {
-        return shoppingCartDao.getAll()
-                .stream()
-                .filter(cart -> cart.getUserId().equals(userId))
-                .findFirst()
-                .get();
+        return shoppingCartDao.get(userId).get();
     }
 
     @Override

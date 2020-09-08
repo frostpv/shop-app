@@ -13,5 +13,7 @@ public interface ShoppingCartDao {
 
     ShoppingCart update(ShoppingCart shoppingCart);
 
+    ShoppingCart getByUserId(Long userId);
+
     boolean delete(Long id);
 }
