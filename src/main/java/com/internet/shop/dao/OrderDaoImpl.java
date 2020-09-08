@@ -34,7 +34,7 @@ public class OrderDaoImpl implements OrderDao {
                 return or;
             }
         }
-        throw new RuntimeException("Order does not exist in database with id "+order.getId());
+        throw new RuntimeException("Order does not exist in database with id " + order.getId());
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.internet.shop.models.ShoppingCart;
 import com.internet.shop.models.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Storage {
     public static List<Product> products = new ArrayList<>();
@@ -18,7 +19,7 @@ public class Storage {
     private static long shoppingCartId = 0;
 
     public static Product addProduct(Product product) {
-        if (isNotNull(product)) {
+        if (Objects.nonNull(product)) {
             product.setId(++productId);
             products.add(product);
         }
@@ -26,7 +27,7 @@ public class Storage {
     }
 
     public static User addUser(User user) {
-        if (isNotNull(user)) {
+        if (Objects.nonNull(user)) {
             user.setId(++userId);
             users.add(user);
         }
@@ -34,7 +35,7 @@ public class Storage {
     }
 
     public static Order addOrder(Order order) {
-        if (isNotNull(order)) {
+        if (Objects.nonNull(order)) {
             order.setId(++orderId);
             orders.add(order);
         }
@@ -42,14 +43,10 @@ public class Storage {
     }
 
     public static ShoppingCart addShopingCart(ShoppingCart shoppingCart) {
-        if (isNotNull(shoppingCart)) {
+        if (Objects.nonNull(shoppingCart)) {
             shoppingCart.setId(++shoppingCartId);
             shoppingCarts.add(shoppingCart);
         }
         return shoppingCart;
-    }
-
-    private static boolean isNotNull(Object object) {
-        return object != null;
     }
 }

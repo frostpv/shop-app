@@ -34,7 +34,8 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
                 return cart;
             }
         }
-        throw new RuntimeException("Cart does not exist in database with id "+shoppingCart.getId());
+        throw new RuntimeException("Cart does not exist in database with id "
+                + shoppingCart.getId());
     }
 
     @Override

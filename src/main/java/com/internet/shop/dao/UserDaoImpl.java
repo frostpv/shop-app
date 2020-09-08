@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
                 return user;
             }
         }
-        throw new RuntimeException("User does not exist in database with id "+user.getId());
+        throw new RuntimeException("User does not exist in database with id " + user.getId());
     }
 
     @Override
