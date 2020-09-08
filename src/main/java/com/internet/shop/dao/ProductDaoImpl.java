@@ -33,7 +33,7 @@ public class ProductDaoImpl implements ProductDao {
                 return prod;
             }
         }
-        throw new RuntimeException("Product does is not exist in database");
+        throw new RuntimeException("Product does is not exist in database with id "+product.getId());
     }
 
     @Override
