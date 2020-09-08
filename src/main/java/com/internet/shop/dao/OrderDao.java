@@ -14,4 +14,6 @@ public interface OrderDao {
     Order update(Order order);
 
     boolean delete(Long id);
+
+    List<Order> getUserOrders(Long userId);
 }

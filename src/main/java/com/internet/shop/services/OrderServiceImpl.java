@@ -6,7 +6,6 @@ import com.internet.shop.lib.Service;
 import com.internet.shop.models.Order;
 import com.internet.shop.models.ShoppingCart;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderServiceInterface {
@@ -28,9 +27,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 
     @Override
     public List<Order> getUserOrders(Long userId) {
-        return getAll().stream()
-                .filter(order -> order.getId().equals(userId))
-                .collect(Collectors.toList());
+        return orderDao.getUserOrders(userId);
     }
 
     @Override
