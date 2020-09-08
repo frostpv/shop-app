@@ -16,7 +16,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Optional<Product> get(Long id) {
         return Storage.products.stream()
-                .filter(product -> id.equals(product.getId()))
+                .filter(product -> product.getId().equals(id))
                 .findFirst();
     }
 
@@ -33,7 +33,8 @@ public class ProductDaoImpl implements ProductDao {
                 return prod;
             }
         }
-        throw new RuntimeException("Product is not exist in database");
+        throw new RuntimeException("Product does is not exist in database with id "
+                + product.getId());
     }
 
     @Override

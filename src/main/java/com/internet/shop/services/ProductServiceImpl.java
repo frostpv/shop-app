@@ -7,7 +7,7 @@ import com.internet.shop.models.Product;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductServiceInterface {
+public class ProductServiceImpl implements ProductService {
     @Inject
     private ProductDao productDao;
 
@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     @Override
     public Product get(Long id) {
-        return productDao.get(id).orElseThrow();
+        return productDao.get(id).get();
     }
 
     @Override
@@ -28,10 +28,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     @Override
     public Product update(Product product) {
-        if (get(product.getId()).getId() == product.getId()) {
-            return productDao.update(product);
-        }
-        throw new RuntimeException("Product is not found");
+        return productDao.update(product);
     }
 
     @Override

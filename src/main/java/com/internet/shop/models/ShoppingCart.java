@@ -12,7 +12,7 @@ public class ShoppingCart {
         this.products = new ArrayList<>();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -28,11 +28,19 @@ public class ShoppingCart {
         this.products = products;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" + "id="
+                + id + ", products="
+                + products + ", userId="
+                + userId + '}';
     }
 }

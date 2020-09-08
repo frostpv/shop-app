@@ -8,11 +8,12 @@ public class Order {
     private List<Product> products;
     private Long idUser;
 
-    public Order() {
+    public Order(Long idUser) {
         this.products = new ArrayList<>();
+        this.idUser = idUser;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -28,11 +29,19 @@ public class Order {
         this.products = products;
     }
 
-    public long getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
     public void setIdUser(long idUser) {
         this.idUser = idUser;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "id="
+                + id + ", products="
+                + products + ", idUser="
+                + idUser + '}';
     }
 }
