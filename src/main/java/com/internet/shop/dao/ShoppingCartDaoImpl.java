@@ -28,10 +28,10 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart update(ShoppingCart shoppingCart) {
-        for (ShoppingCart scrd : Storage.shoppingCarts) {
-            if (scrd.getId().equals(shoppingCart.getId())) {
-                Storage.shoppingCarts.set(Storage.shoppingCarts.indexOf(scrd), shoppingCart);
-                return scrd;
+        for (ShoppingCart cart : Storage.shoppingCarts) {
+            if (cart.getId().equals(shoppingCart.getId())) {
+                Storage.shoppingCarts.set(Storage.shoppingCarts.indexOf(cart), shoppingCart);
+                return cart;
             }
         }
         throw new RuntimeException("Cart does not exist in database");
