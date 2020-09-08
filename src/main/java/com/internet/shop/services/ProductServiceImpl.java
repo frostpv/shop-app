@@ -7,7 +7,7 @@ import com.internet.shop.models.Product;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductServiceInterface {
+public class ProductServiceImpl implements ProductService {
     @Inject
     private ProductDao productDao;
 

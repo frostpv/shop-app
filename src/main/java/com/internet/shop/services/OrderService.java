@@ -4,7 +4,7 @@ import com.internet.shop.models.Order;
 import com.internet.shop.models.ShoppingCart;
 import java.util.List;
 
-public interface OrderServiceInterface {
+public interface OrderService {
     Order completeOrder(ShoppingCart shoppingCart);
 
     List<Order> getUserOrders(Long userId);

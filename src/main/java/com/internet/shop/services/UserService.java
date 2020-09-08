@@ -3,7 +3,7 @@ package com.internet.shop.services;
 import com.internet.shop.models.User;
 import java.util.List;
 
-public interface UserServiceInterface {
+public interface UserService {
 
     User create(User user);
 

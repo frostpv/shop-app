@@ -8,13 +8,13 @@ import com.internet.shop.models.ShoppingCart;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderServiceInterface {
+public class OrderServiceImpl implements OrderService {
 
     @Inject
     private OrderDao orderDao;
 
     @Inject
-    private ShoppingCartServiceIntercace shoppingCartService;
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public Order completeOrder(ShoppingCart shoppingCart) {

@@ -7,7 +7,7 @@ import com.internet.shop.models.Product;
 import com.internet.shop.models.ShoppingCart;
 
 @Service
-public class ShoppingCartServiceImpl implements ShoppingCartServiceIntercace {
+public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Inject
     private ShoppingCartDao shoppingCartDao;

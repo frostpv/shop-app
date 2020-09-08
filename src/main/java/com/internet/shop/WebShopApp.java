@@ -4,16 +4,16 @@ import com.internet.shop.lib.Injector;
 import com.internet.shop.models.Product;
 import com.internet.shop.models.ShoppingCart;
 import com.internet.shop.models.User;
-import com.internet.shop.services.OrderServiceInterface;
-import com.internet.shop.services.ProductServiceInterface;
-import com.internet.shop.services.ShoppingCartServiceIntercace;
-import com.internet.shop.services.UserServiceInterface;
+import com.internet.shop.services.OrderService;
+import com.internet.shop.services.ProductService;
+import com.internet.shop.services.ShoppingCartService;
+import com.internet.shop.services.UserService;
 
 public class WebShopApp {
     public static void main(String[] args) {
-        ProductServiceInterface productService =
-                (ProductServiceInterface) Injector.getInstance("com.internet.shop")
-                 .getInstance(ProductServiceInterface.class);
+        ProductService productService =
+                (ProductService) Injector.getInstance("com.internet.shop")
+                 .getInstance(ProductService.class);
 
         Product iphone6s = new Product("Iphone6s", 100);
         Product iphone7 = new Product("Iphone7", 400);
@@ -28,9 +28,9 @@ public class WebShopApp {
         productService.create(iphoneX);
         productService.create(iphone11);
         System.out.println(productService.getAll());
-        UserServiceInterface userService =
-                (UserServiceInterface) Injector.getInstance("com.internet.shop")
-                        .getInstance(UserServiceInterface.class);
+        UserService userService =
+                (UserService) Injector.getInstance("com.internet.shop")
+                        .getInstance(UserService.class);
         User jon = new User("Jon", "LamaR@@", "XXXsre");
         userService.create(jon);
         User mike = new User("Mike", "Rabbit453", "erydsg234e");
@@ -44,9 +44,9 @@ public class WebShopApp {
         mikeCart.setUserId(2);
         ShoppingCart liamCart = new ShoppingCart();
         liamCart.setUserId(3);
-        ShoppingCartServiceIntercace shoppingCartService =
-                (ShoppingCartServiceIntercace) Injector.getInstance("com.internet.shop")
-                        .getInstance(ShoppingCartServiceIntercace.class);
+        ShoppingCartService shoppingCartService =
+                (ShoppingCartService) Injector.getInstance("com.internet.shop")
+                        .getInstance(ShoppingCartService.class);
         shoppingCartService.create(jonCart);
         shoppingCartService.create(mikeCart);
         shoppingCartService.create(liamCart);
@@ -55,9 +55,9 @@ public class WebShopApp {
         shoppingCartService.addProduct(jonCart, iphone6s);
         shoppingCartService.addProduct(jonCart, iphone7plus);
         System.out.println(shoppingCartService.getByUserId(jon.getId()));
-        OrderServiceInterface orderService =
-                (OrderServiceInterface) Injector.getInstance("com.internet.shop")
-                        .getInstance(OrderServiceInterface.class);
+        OrderService orderService =
+                (OrderService) Injector.getInstance("com.internet.shop")
+                        .getInstance(OrderService.class);
         orderService.completeOrder(jonCart);
         System.out.println(shoppingCartService.getByUserId(jon.getId()));
         System.out.println(orderService.getAll());
