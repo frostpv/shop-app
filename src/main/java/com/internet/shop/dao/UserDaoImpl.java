@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> get(Long id) {
         return Storage.users.stream()
-                .filter(product -> id.equals(product.getId()))
+                .filter(product -> product.getId().equals(id))
                 .findFirst();
     }
 
