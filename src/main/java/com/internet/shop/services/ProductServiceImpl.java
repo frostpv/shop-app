@@ -28,10 +28,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
 
     @Override
     public Product update(Product product) {
-        if (get(product.getId()).getId() == product.getId()) {
-            return productDao.update(product);
-        }
-        throw new RuntimeException("Product is not found");
+        return productDao.update(product);
     }
 
     @Override

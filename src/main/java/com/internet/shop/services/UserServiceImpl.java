@@ -19,9 +19,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
     @Override
     public User get(Long id) {
-        return userDao
-                .get(id)
-                .get();
+        return userDao.get(id).get();
     }
 
     @Override
@@ -31,10 +29,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
     @Override
     public User update(User user) {
-        if (user.getId().equals(get(user.getId()).getId())) {
-            return userDao.update(user);
-        }
-        throw new RuntimeException("User is not found");
+        return userDao.update(user);
     }
 
     @Override
