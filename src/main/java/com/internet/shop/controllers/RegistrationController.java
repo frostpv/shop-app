@@ -31,7 +31,7 @@ public class RegistrationController extends HttpServlet {
         if (psw.equals(pswRepeat)) {
             User user = new User(name, login, psw);
             userService.create(user);
-            resp.sendRedirect(req.getContextPath() + "/");
+            resp.sendRedirect(req.getContextPath() + "/users");
         } else {
             req.setAttribute("message", "You password and repeat aren't same.");
             req.getRequestDispatcher("/WEB-INF/views/user/register.jsp").forward(req, resp);
