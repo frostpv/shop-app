@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,6 +13,22 @@
     <a href="${pageContext.request.contextPath}/users">Users</a> |
     <a href="${pageContext.request.contextPath}/users/registration">Regisration</a> |
     <a href="${pageContext.request.contextPath}/cart">Cart</a>
+</p>
+<p>
+<table border="1">
+    <tr>
+        <td><strong>ID</strong></td>
+        <td><strong>User</strong></td>
+        <td><strong>Action</strong></td>
+        <c:forEach var="user" items="${users}">
+    <tr>
+        <td><c:out value="${user.userId}"/></td>
+        <td><c:out value="${user.name}"/></td>
+        <td><c:out value="${user.userId}"/></td>
+    </tr>
+    </c:forEach>
+    </tr>
+</table>
 </p>
 </body>
 </html>
