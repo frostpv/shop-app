@@ -2,10 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Products</title>
+    <title>Cart</title>
 </head>
 <body>
-<h1>Products</h1>
+<h1>Cart</h1>
 <p>
     <a href="${pageContext.request.contextPath}/">HomePage</a> |
     <a href="${pageContext.request.contextPath}/products">Products</a> |
@@ -17,19 +17,12 @@
 <p>
 <table border="1">
     <tr>
-        <td><strong>ID</strong></td>
-        <td><strong>Product name</strong></td>
+        <td><strong>Name</strong></td>
         <td><strong>Price</strong></td>
-        <td><strong>Action</strong></td>
-        <c:forEach var="product" items="${products}">
+        <c:forEach var="item" items="${cart}">
     <tr>
-        <td><c:out value="${product.id}"/></td>
-        <td><c:out value="${product.name}"/></td>
-        <td><c:out value="${product.price}"/></td>
-        <td><form action="${pageContext.request.contextPath}/cart" method="post">
-            <input hidden name = "id" value="${product.id}">
-            <input type="submit" value="buy">
-        </form></td>
+        <td><c:out value="${item.name}"/></td>
+        <td><c:out value="${item.price}"/></td>
     </tr>
     </c:forEach>
     </tr>

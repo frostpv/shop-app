@@ -47,4 +47,14 @@
         <servlet-name>products</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>cart</servlet-name>
+        <servlet-class>com.internet.shop.controllers.CartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
