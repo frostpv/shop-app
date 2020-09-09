@@ -24,7 +24,7 @@
     <tr>
         <td><c:out value="${user.id}"/></td>
         <td><c:out value="${user.name}"/></td>
-        <td><c:out value="${user.id}"/></td>
+        <td><a href="${pageContext.request.contextPath}/remove-user/?<c:out value="${user.id}"/>">remove</a></td>
     </tr>
     </c:forEach>
     </tr>

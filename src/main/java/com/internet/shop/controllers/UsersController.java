@@ -19,7 +19,6 @@ public class UsersController extends HttpServlet {
             throws ServletException, IOException {
         List<User> users = userService.getAll();
         req.setAttribute("users", users);
-
         req.getRequestDispatcher("/WEB-INF/views/user/all.jsp").forward(req, resp);
     }
 }
