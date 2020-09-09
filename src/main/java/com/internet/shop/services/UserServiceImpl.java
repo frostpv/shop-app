@@ -7,7 +7,7 @@ import com.internet.shop.models.User;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class  UserServiceImpl implements UserService {
 
     @Inject
     private UserDao userDao;
