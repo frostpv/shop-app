@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ProductAddController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("com.internet.shop");
-    private ProductService productService = (ProductService) injector.getInstance(ProductService.class);
+    private static final Injector injector =
+            Injector.getInstance("com.internet.shop");
+    private ProductService productService =
+            (ProductService) injector.getInstance(ProductService.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
