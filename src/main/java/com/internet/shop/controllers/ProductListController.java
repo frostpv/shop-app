@@ -2,7 +2,6 @@ package com.internet.shop.controllers;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.models.Product;
-import com.internet.shop.models.User;
 import com.internet.shop.services.ProductService;
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 public class ProductListController extends HttpServlet {
     private static final Injector injector =

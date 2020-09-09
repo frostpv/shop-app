@@ -21,4 +21,12 @@ public class UsersController extends HttpServlet {
         req.setAttribute("users", users);
         req.getRequestDispatcher("/WEB-INF/views/user/all.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String id = req.getParameter("id");
+        userService.delete(Long.parseLong(id));
+        resp.sendRedirect(req.getContextPath() + "/users");
+    }
 }
