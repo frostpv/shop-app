@@ -31,8 +31,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order create(Order item) {
-        return orderDao.create(item);
+    public Order create(Order order) {
+        return orderDao.create(order);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order update(Order item) {
-        return orderDao.update(item);
+    public Order update(Order order) {
+        return orderDao.update(order);
     }
 
     @Override
