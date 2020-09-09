@@ -30,8 +30,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart update(ShoppingCart item) {
-        return shoppingCartDao.update(item);
+    public ShoppingCart update(ShoppingCart shoppingCart) {
+        return shoppingCartDao.update(shoppingCart);
     }
 
     @Override
