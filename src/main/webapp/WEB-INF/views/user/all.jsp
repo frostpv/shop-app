@@ -24,7 +24,7 @@
     <tr>
         <td><c:out value="${user.id}"/></td>
         <td><c:out value="${user.name}"/></td>
-        <td><form action="${pageContext.request.contextPath}/users" method="post">
+        <td><form action="${pageContext.request.contextPath}/user/remove" method="post">
             <input hidden name = "id" value="${user.id}">
             <input type="submit" value="delete">
         </form></td>
