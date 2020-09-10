@@ -33,7 +33,6 @@ public class CartController extends HttpServlet {
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUserId(USER_ID);
             shoppingCartService.create(shoppingCart);
-            System.out.println(555);
             req.setAttribute("cart", shoppingCart.getProducts());
             req.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp").forward(req, resp);
         }
