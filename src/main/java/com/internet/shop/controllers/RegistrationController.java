@@ -22,12 +22,10 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String psw = req.getParameter("psw");
         String pswRepeat = req.getParameter("psw-repeat");
-
         if (psw.equals(pswRepeat)) {
             User user = new User(name, login, psw);
             userService.create(user);
