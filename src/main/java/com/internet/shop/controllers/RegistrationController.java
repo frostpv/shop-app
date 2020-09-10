@@ -1,7 +1,9 @@
 package com.internet.shop.controllers;
 
 import com.internet.shop.lib.Injector;
+import com.internet.shop.models.ShoppingCart;
 import com.internet.shop.models.User;
+import com.internet.shop.services.ShoppingCartService;
 import com.internet.shop.services.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class RegistrationController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private UserService userService = (UserService) injector.getInstance(UserService.class);
+    private ShoppingCartService shoppingCartService =
+            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -28,7 +32,10 @@ public class RegistrationController extends HttpServlet {
         String pswRepeat = req.getParameter("psw-repeat");
         if (psw.equals(pswRepeat)) {
             User user = new User(name, login, psw);
-            userService.create(user);
+            ShoppingCart shoppingCart = new ShoppingCart();
+            user = userService.create(user);
+            shoppingCart.setUserId(user.getId());
+            shoppingCartService.create(shoppingCart);
             resp.sendRedirect(req.getContextPath() + "/users");
         } else {
             req.setAttribute("message", "You password and repeat aren't same.");
