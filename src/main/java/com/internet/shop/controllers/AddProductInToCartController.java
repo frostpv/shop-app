@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CartController extends HttpServlet {
+public class AddProductInToCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
     private static final Injector injector =
             Injector.getInstance("com.internet.shop");
@@ -20,11 +20,11 @@ public class CartController extends HttpServlet {
             (ProductService) injector.getInstance(ProductService.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        String id = req.getParameter("id");
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
-        req.setAttribute("cart", shoppingCart.getProducts());
-        req.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp").forward(req, resp);
+        shoppingCartService.addProduct(shoppingCart, productService.get(Long.parseLong(id)));
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
-
 }
