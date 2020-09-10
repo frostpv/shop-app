@@ -12,6 +12,8 @@
     <a href="${pageContext.request.contextPath}/users">Users</a> |
     <a href="${pageContext.request.contextPath}/users/registration">Regisration</a> |
     <a href="${pageContext.request.contextPath}/cart">Cart</a>
+    <a href="${pageContext.request.contextPath}/orders">Orders</a>
+    <a href="${pageContext.request.contextPath}/orders/list">Orders list</a>
 </p>
 </body>
 </html>

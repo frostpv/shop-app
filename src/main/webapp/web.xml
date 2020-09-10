@@ -91,4 +91,22 @@
         <servlet-name>order-add</servlet-name>
         <url-pattern>/order/add</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>admin-orders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.AdminOrdersList</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin-orders</servlet-name>
+        <url-pattern>/orders/list</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>user-orders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.UserOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user-orders</servlet-name>
+        <url-pattern>/orders</url-pattern>
+    </servlet-mapping>
 </web-app>

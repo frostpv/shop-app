@@ -1,10 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add product in Shop</title>
+    <title>User orders</title>
 </head>
 <body>
-<h1>Add product</h1>
+<h1>User orders</h1>
 <p>
     <a href="${pageContext.request.contextPath}/">HomePage</a> |
     <a href="${pageContext.request.contextPath}/products">Products</a> |
@@ -16,11 +17,21 @@
     <a href="${pageContext.request.contextPath}/orders/list">Orders list</a>
 </p>
 <p>
-    <form method="post" action="${pageContext.request.contextPath}/products/add">
-        Please provide product name: <input type="text" pattern=".{1,}" required  name="name"></br>
-        Please provide product price: <input type="number" name="price" value="0"></br>
-        <input type="submit" value="Add"></br>
-    </form>
+<table border="1">
+    <tr>
+        <td><strong>Order ID</strong></td>
+        <td><strong>Action</strong></td>
+        <c:forEach var="order" items="${orders}">
+    <tr>
+        <td><c:out value="${order.id}"/></td>
+        <td><form action="${pageContext.request.contextPath}/order" method="post">
+            <input hidden name = "id" value="${order.id}">
+            <input type="submit" value="show order">
+        </form></td>
+    </tr>
+    </c:forEach>
+    </tr>
+</table>
 </p>
 </body>
 </html>
