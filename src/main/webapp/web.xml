@@ -83,5 +83,12 @@
         <url-pattern>/user/remove</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>order-add</servlet-name>
+        <servlet-class>com.internet.shop.controllers.AddOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>order-add</servlet-name>
+        <url-pattern>/order/add</url-pattern>
+    </servlet-mapping>
 </web-app>

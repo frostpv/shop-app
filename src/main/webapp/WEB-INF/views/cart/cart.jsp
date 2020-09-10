@@ -34,5 +34,11 @@
     </tr>
 </table>
 </p>
+<p>
+    <form action="${pageContext.request.contextPath}/order/add" method="post">
+        <input hidden name = "userid" value="1">
+        <input type="submit" value="Make order">
+    </form>
+</p>
 </body>
 </html>
