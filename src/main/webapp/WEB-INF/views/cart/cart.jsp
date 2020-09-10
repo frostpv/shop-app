@@ -19,10 +19,16 @@
     <tr>
         <td><strong>Name</strong></td>
         <td><strong>Price</strong></td>
-        <c:forEach var="item" items="${cart}">
+        <td><strong>Action</strong></td>
+    <c:forEach var="item" items="${cart}">
     <tr>
         <td><c:out value="${item.name}"/></td>
         <td><c:out value="${item.price}"/></td>
+        <td><form action="${pageContext.request.contextPath}/cart/remove" method="post">
+            <input hidden name = "name" value="${item.name}">
+            <input hidden name = "price" value="${item.price}">
+            <input type="submit" value="delete">
+        </form></td>
     </tr>
     </c:forEach>
     </tr>

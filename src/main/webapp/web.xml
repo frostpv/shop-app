@@ -66,6 +66,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>cartRemove</servlet-name>
+        <servlet-class>com.internet.shop.controllers.DeleteFromCartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cartRemove</servlet-name>
+        <url-pattern>/cart/remove</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>remove-user</servlet-name>
         <servlet-class>com.internet.shop.controllers.DeleteUserController</servlet-class>
     </servlet>
