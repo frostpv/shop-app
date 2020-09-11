@@ -27,10 +27,15 @@
     <tr>
         <td><c:out value="${order.id}"/></td>
         <td><c:out value="${order.idUser}"/></td>
-        <td><form action="${pageContext.request.contextPath}/order" method="post">
+        <td>
+            <form action="${pageContext.request.contextPath}/order" method="post">
             <input hidden name = "id" value="${order.id}">
             <input type="submit" value="show order">
-        </form></td>
+        </form>
+            <form action="${pageContext.request.contextPath}/order/delete" method="post">
+                <input hidden name = "id" value="${order.id}">
+                <input type="submit" value="delete order">
+            </form></td>
     </tr>
     </c:forEach>
     </tr>
