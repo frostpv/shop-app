@@ -47,6 +47,27 @@
         <servlet-name>products</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>editproducts</servlet-name>
+        <servlet-class>com.internet.shop.controllers.EditProductsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>editproducts</servlet-name>
+        <url-pattern>/products/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteproduct</servlet-name>
+        <servlet-class>com.internet.shop.controllers.DeleteProductController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteproduct</servlet-name>
+        <url-pattern>/product/delete</url-pattern>
+    </servlet-mapping>
+
+
+
     <servlet>
         <servlet-name>cart</servlet-name>
         <servlet-class>com.internet.shop.controllers.CartController</servlet-class>
