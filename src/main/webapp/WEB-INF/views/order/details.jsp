@@ -22,10 +22,6 @@
         <td><c:out value="${product.id}"/></td>
         <td><c:out value="${product.name}"/></td>
         <td><c:out value="${product.price}"/></td>
-        <td><form action="${pageContext.request.contextPath}/order" method="post">
-            <input hidden name = "id" value="${product.id}">
-            <input type="submit" value="show order">
-        </form></td>
     </tr>
     </c:forEach>
     <tr>
