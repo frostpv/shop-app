@@ -124,7 +124,7 @@
 
     <servlet>
         <servlet-name>user-orders</servlet-name>
-        <servlet-class>com.internet.shop.controllers.UserOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.GetUserOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>user-orders</servlet-name>
