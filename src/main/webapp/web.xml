@@ -115,7 +115,7 @@
 
     <servlet>
         <servlet-name>admin-orders</servlet-name>
-        <servlet-class>com.internet.shop.controllers.AdminOrdersList</servlet-class>
+        <servlet-class>com.internet.shop.controllers.GetAllOrdersAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>admin-orders</servlet-name>
