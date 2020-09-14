@@ -2,10 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Products</title>
+    <title>User orders</title>
 </head>
 <body>
-<h1>Products</h1>
+<h1>User orders</h1>
 <p>User part</p>
 <a href="${pageContext.request.contextPath}/">HomePage</a> |
 <a href="${pageContext.request.contextPath}/products">Products</a> |
@@ -16,18 +16,14 @@
 <p>
 <table border="1">
     <tr>
-        <td><strong>ID</strong></td>
-        <td><strong>Product name</strong></td>
-        <td><strong>Price</strong></td>
+        <td><strong>Order ID</strong></td>
         <td><strong>Action</strong></td>
-        <c:forEach var="product" items="${products}">
+        <c:forEach var="order" items="${orders}">
     <tr>
-        <td><c:out value="${product.id}"/></td>
-        <td><c:out value="${product.name}"/></td>
-        <td><c:out value="${product.price}"/></td>
-        <td><form action="${pageContext.request.contextPath}/cart/add" method="post">
-            <input hidden name = "id" value="${product.id}">
-            <input type="submit" value="buy">
+        <td><c:out value="${order.id}"/></td>
+        <td><form action="${pageContext.request.contextPath}/order/details" method="post">
+            <input hidden name = "id" value="${order.id}">
+            <input type="submit" value="show order">
         </form></td>
     </tr>
     </c:forEach>

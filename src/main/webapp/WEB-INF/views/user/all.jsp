@@ -6,13 +6,13 @@
 </head>
 <body>
 <h1>All users</h1>
+<p>Admin part</p>
 <p>
-    <a href="${pageContext.request.contextPath}/">HomePage</a> |
-    <a href="${pageContext.request.contextPath}/products">Products</a> |
     <a href="${pageContext.request.contextPath}/products/add">Add product</a> |
+    <a href="${pageContext.request.contextPath}/products/edit">Edit product</a> |
     <a href="${pageContext.request.contextPath}/users">Users</a> |
-    <a href="${pageContext.request.contextPath}/users/registration">Regisration</a> |
-    <a href="${pageContext.request.contextPath}/cart">Cart</a>
+    <a href="${pageContext.request.contextPath}/orders">Orders list</a> |
+    <a href="${pageContext.request.contextPath}/">User part</a> |
 </p>
 <p>
 <table border="1">
