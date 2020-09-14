@@ -132,12 +132,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>order</servlet-name>
+        <servlet-name>order-details</servlet-name>
         <servlet-class>com.internet.shop.controllers.ShowOrderController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>order</servlet-name>
-        <url-pattern>/order</url-pattern>
+        <servlet-name>order-details</servlet-name>
+        <url-pattern>/order/details</url-pattern>
     </servlet-mapping>
 
     <servlet>

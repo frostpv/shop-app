@@ -28,7 +28,7 @@
         <c:forEach var="order" items="${orders}">
     <tr>
         <td><c:out value="${order.id}"/></td>
-        <td><form action="${pageContext.request.contextPath}/order" method="post">
+        <td><form action="${pageContext.request.contextPath}/order/details" method="post">
             <input hidden name = "id" value="${order.id}">
             <input type="submit" value="show order">
         </form></td>

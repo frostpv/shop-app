@@ -26,6 +26,6 @@ public class ShowOrderController extends HttpServlet {
                 .sum();
         req.setAttribute("sum", sum);
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/views/order/order.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/order/details.jsp").forward(req, resp);
     }
 }
