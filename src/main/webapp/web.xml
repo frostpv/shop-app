@@ -148,4 +148,13 @@
         <servlet-name>delete</servlet-name>
         <url-pattern>/order/delete</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>admin-index</servlet-name>
+        <servlet-class>com.internet.shop.controllers.AdminIndexController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin-index</servlet-name>
+        <url-pattern>/admin/index</url-pattern>
+    </servlet-mapping>
 </web-app>
