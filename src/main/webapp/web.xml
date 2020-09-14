@@ -106,7 +106,7 @@
 
     <servlet>
         <servlet-name>order-add</servlet-name>
-        <servlet-class>com.internet.shop.controllers.AddOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.CompleteOrderController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>order-add</servlet-name>
