@@ -63,7 +63,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteproduct</servlet-name>
-        <url-pattern>/product/delete</url-pattern>
+        <url-pattern>/products/delete</url-pattern>
     </servlet-mapping>
 
 

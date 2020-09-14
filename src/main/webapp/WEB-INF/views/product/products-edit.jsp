@@ -26,7 +26,7 @@
         <td><c:out value="${product.id}"/></td>
         <td><c:out value="${product.name}"/></td>
         <td><c:out value="${product.price}"/></td>
-        <td><form action="${pageContext.request.contextPath}/product/delete" method="post">
+        <td><form action="${pageContext.request.contextPath}/products/delete" method="post">
             <input hidden name = "id" value="${product.id}">
             <input type="submit" value="delete">
         </form>
