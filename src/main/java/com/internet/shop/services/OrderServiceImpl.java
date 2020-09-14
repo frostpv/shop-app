@@ -32,8 +32,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Double getOrderPrice(Long orderId) {
-        List<Product> products = get(orderId).getProducts();
+    public Double getOrderPrice(Order order) {
+        List<Product> products = order.getProducts();
         return products.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();

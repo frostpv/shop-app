@@ -1,10 +1,9 @@
 package com.internet.shop.controllers;
 
 import com.internet.shop.lib.Injector;
-import com.internet.shop.models.Product;
+import com.internet.shop.models.Order;
 import com.internet.shop.services.OrderService;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +19,9 @@ public class OrderDetailsController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String id = req.getParameter("id");
-        List<Product> products = orderService.get(Long.parseLong(id)).getProducts();
-        req.setAttribute("sum", orderService.getOrderPrice(Long.parseLong(id)));
-        req.setAttribute("products", products);
+        Order order = orderService.get(Long.parseLong(id));
+        req.setAttribute("sum", orderService.getOrderPrice(order));
+        req.setAttribute("products", order.getProducts());
         req.getRequestDispatcher("/WEB-INF/views/order/details.jsp").forward(req, resp);
     }
 }

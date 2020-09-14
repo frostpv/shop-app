@@ -9,5 +9,5 @@ public interface OrderService extends GenericService<Order, Long> {
 
     List<Order> getUserOrders(Long userId);
 
-    Double getOrderPrice(Long orderId);
+    Double getOrderPrice(Order order);
 }
