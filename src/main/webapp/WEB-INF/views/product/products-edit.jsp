@@ -41,10 +41,12 @@
     </c:forEach>
     </tr>
     <tr>
+        <form method="post" action="${pageContext.request.contextPath}/products/add">
         <td></td>
-        <td></td>
-        <td></td>
-        <td><a href="${pageContext.request.contextPath}/products/add">Add new product</a></td>
+        <td><input type="text" pattern=".{1,}" required  name="name" placeholder="product name"></td>
+        <td><input type="number" name="price" value="0"></td>
+        <td><input type="submit" value="Add"></td>
+        </form>
     </tr>
 </table>
 </p>

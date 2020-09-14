@@ -133,7 +133,7 @@
 
     <servlet>
         <servlet-name>order-details</servlet-name>
-        <servlet-class>com.internet.shop.controllers.ShowOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.OrderDetailsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>order-details</servlet-name>
