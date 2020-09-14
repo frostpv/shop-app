@@ -11,6 +11,7 @@
     Please provide your login: <input type="text" name="login"></br>
     Please provide your password: <input type="password" name="psw"></br>
     <input type="submit" value="Login"></br>
+    <a href="${pageContext.request.contextPath}/users/registration">Register</a>
 </form>
 </p>
 </body>
