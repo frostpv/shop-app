@@ -18,6 +18,6 @@ public class GetAllOrdersAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setAttribute("orders", orderService.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/orders.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/order/orders.jsp").forward(req, resp);
     }
 }
