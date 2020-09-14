@@ -21,10 +21,7 @@ public class OrderDetailsController extends HttpServlet {
             throws ServletException, IOException {
         String id = req.getParameter("id");
         List<Product> products = orderService.get(Long.parseLong(id)).getProducts();
-        double sum = products.stream()
-                .mapToDouble(Product::getPrice)
-                .sum();
-        req.setAttribute("sum", sum);
+        req.setAttribute("sum", orderService.getOrderPrice(Long.parseLong(id)));
         req.setAttribute("products", products);
         req.getRequestDispatcher("/WEB-INF/views/order/details.jsp").forward(req, resp);
     }
