@@ -10,7 +10,7 @@
     <a href="${pageContext.request.contextPath}/products/add">Add product</a> |
     <a href="${pageContext.request.contextPath}/products/edit">Edit product</a> |
     <a href="${pageContext.request.contextPath}/users">Users</a> |
-    <a href="${pageContext.request.contextPath}/orders/list">Orders list</a> |
+    <a href="${pageContext.request.contextPath}/orders">Orders list</a> |
     <a href="${pageContext.request.contextPath}/">Orders list</a> |
 </p>
 <p>
