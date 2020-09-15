@@ -4,7 +4,6 @@ import com.internet.shop.exceptions.AuthenticationException;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.models.User;
 import com.internet.shop.security.AuthenticationService;
-import com.internet.shop.services.ShoppingCartService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginController extends HttpServlet {
+    private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private AuthenticationService authenticationService =
             (AuthenticationService) injector.getInstance(AuthenticationService.class);
@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
         try {
             User user = authenticationService.login(login, pasword);
             HttpSession session = req.getSession();
-            session.setAttribute("user_id", user.getId());
+            session.setAttribute(USER_ID, user.getId());
         } catch (AuthenticationException e) {
             req.setAttribute("errorMsg", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(req, resp);
