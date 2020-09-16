@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -50,7 +49,7 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String servletPath = req.getServletPath();
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        if (Objects.isNull(protectedUrls.get(servletPath))) {
+        if ((protectedUrls.containsKey(servletPath))) {
             chain.doFilter(req, resp);
             return;
         }
