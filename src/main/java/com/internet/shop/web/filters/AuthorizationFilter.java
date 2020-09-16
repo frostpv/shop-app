@@ -49,7 +49,7 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String servletPath = req.getServletPath();
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        if ((protectedUrls.containsKey(servletPath))) {
+        if (!protectedUrls.containsKey(servletPath)) {
             chain.doFilter(req, resp);
             return;
         }

@@ -40,8 +40,9 @@ public class RegistrationController extends HttpServlet {
             user.setRoles(roleSet);
             ShoppingCart shoppingCart = new ShoppingCart();
             user = userService.create(user);
-            shoppingCart.setUserId(user.getId());
             shoppingCartService.create(shoppingCart);
+            shoppingCart.setUserId(user.getId());
+
             resp.sendRedirect(req.getContextPath() + "/users");
         } else {
             req.setAttribute("message", "You password and repeat aren't same.");

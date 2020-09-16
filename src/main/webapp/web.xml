@@ -175,6 +175,15 @@
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>inject</servlet-name>
+        <servlet-class>com.internet.shop.controllers.InjectController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>inject</servlet-name>
+        <url-pattern>/inject</url-pattern>
+    </servlet-mapping>
     
     <filter>
         <filter-name>authenticationFilter</filter-name>
