@@ -30,6 +30,19 @@ public class AuthorizationFilter implements Filter {
         protectedUrls.put("/", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
         protectedUrls.put("/users", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/products/add", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/products/edit", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products/delete", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/cart", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/cart/add", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/cart/remove", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/user/remove", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/order/add", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/orders", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/user/orders", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/order/details", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/order/delete", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/admin/index", List.of(Role.RoleName.ADMIN));
     }
 
     @Override
@@ -45,11 +58,6 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        if (userId == null || userService.get(userId) == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
-
         User user = userService.get(userId);
         if (isAuthorized(user, protectedUrls.get(servletPath))) {
             chain.doFilter(req, resp);
@@ -57,7 +65,6 @@ public class AuthorizationFilter implements Filter {
             req.getRequestDispatcher("/WEB-INF/views/errors/denied.jsp")
                     .forward(req, resp);
         }
-        return;
     }
 
     @Override
