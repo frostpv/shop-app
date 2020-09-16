@@ -35,17 +35,11 @@ public class RegistrationController extends HttpServlet {
         String pswRepeat = req.getParameter("psw-repeat");
         if (psw.equals(pswRepeat)) {
             User user = new User(name, login, psw);
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add(Role.of("USER"));
+            user.setRoles(roleSet);
             ShoppingCart shoppingCart = new ShoppingCart();
             user = userService.create(user);
-            Set<Role> roleSet = new HashSet<>();
-            if (user.getId() == 1) {
-                roleSet.add(Role.of("ADMIN"));
-                roleSet.add(Role.of("USER"));
-                user.setRoles(roleSet);
-            } else {
-                roleSet.add(Role.of("USER"));
-                user.setRoles(roleSet);
-            }
             shoppingCart.setUserId(user.getId());
             shoppingCartService.create(shoppingCart);
             resp.sendRedirect(req.getContextPath() + "/users");
