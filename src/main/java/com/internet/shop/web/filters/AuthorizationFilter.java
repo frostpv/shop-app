@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthorizationFilter implements Filter {
-
     private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private UserService userService = (UserService) injector.getInstance(UserService.class);
@@ -51,12 +50,10 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String servletPath = req.getServletPath();
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-
         if (Objects.isNull(protectedUrls.get(servletPath))) {
             chain.doFilter(req, resp);
             return;
         }
-
         User user = userService.get(userId);
         if (isAuthorized(user, protectedUrls.get(servletPath))) {
             chain.doFilter(req, resp);
@@ -68,11 +65,9 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void destroy() {
-
     }
 
     private boolean isAuthorized(User user, List<Role.RoleName> authorizedRoles) {
-
         for (Role.RoleName authorizedRole : authorizedRoles) {
             for (Role userRole : user.getRoles()) {
                 if (authorizedRole.equals(userRole.getRoleName())) {
