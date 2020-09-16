@@ -7,7 +7,8 @@ import com.internet.shop.models.User;
 import com.internet.shop.services.ShoppingCartService;
 import com.internet.shop.services.UserService;
 import java.io.IOException;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,10 +37,14 @@ public class RegistrationController extends HttpServlet {
             User user = new User(name, login, psw);
             ShoppingCart shoppingCart = new ShoppingCart();
             user = userService.create(user);
-            if(user.getId()==1) {
-                user.setRoles(List.of(Role.of("ADMIN"), Role.of("USER")));
+            Set<Role> roleSet = new HashSet<>();
+            if (user.getId() == 1) {
+                roleSet.add(Role.of("ADMIN"));
+                roleSet.add(Role.of("USER"));
+                user.setRoles(roleSet);
             } else {
-                user.setRoles(List.of(Role.of("USER")));
+                roleSet.add(Role.of("USER"));
+                user.setRoles(roleSet);
             }
             shoppingCart.setUserId(user.getId());
             shoppingCartService.create(shoppingCart);

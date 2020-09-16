@@ -28,6 +28,8 @@ public class AuthorizationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         protectedUrls.put("/", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/users", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products/add", List.of(Role.RoleName.ADMIN));
     }
 
     @Override
@@ -52,7 +54,7 @@ public class AuthorizationFilter implements Filter {
         if (isAuthorized(user, protectedUrls.get(servletPath))) {
             chain.doFilter(req, resp);
         } else {
-            req.getRequestDispatcher(req.getContextPath() + "/errors/accessDenied.jsp")
+            req.getRequestDispatcher("/WEB-INF/views/errors/denied.jsp")
                     .forward(req, resp);
         }
         return;
