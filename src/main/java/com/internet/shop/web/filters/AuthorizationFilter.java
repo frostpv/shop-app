@@ -29,16 +29,16 @@ public class AuthorizationFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         protectedUrls.put("/users", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/products/add", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/products", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/products", List.of(Role.RoleName.USER));
         protectedUrls.put("/products/edit", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/products/delete", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/cart", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
-        protectedUrls.put("/cart/add", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
-        protectedUrls.put("/cart/remove", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/cart", List.of(Role.RoleName.USER));
+        protectedUrls.put("/cart/add", List.of(Role.RoleName.USER));
+        protectedUrls.put("/cart/remove", List.of(Role.RoleName.USER));
         protectedUrls.put("/user/remove", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/order/add", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/order/add", List.of(Role.RoleName.USER));
         protectedUrls.put("/orders", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/user/orders", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
+        protectedUrls.put("/user/orders", List.of(Role.RoleName.USER));
         protectedUrls.put("/order/details", List.of(Role.RoleName.USER, Role.RoleName.ADMIN));
         protectedUrls.put("/order/delete", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/admin/index", List.of(Role.RoleName.ADMIN));
