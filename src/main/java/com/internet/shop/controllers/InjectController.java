@@ -3,6 +3,7 @@ package com.internet.shop.controllers;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.models.Product;
 import com.internet.shop.models.Role;
+import com.internet.shop.models.ShoppingCart;
 import com.internet.shop.models.User;
 import com.internet.shop.services.ProductService;
 import com.internet.shop.services.ShoppingCartService;
@@ -48,6 +49,14 @@ public class InjectController extends HttpServlet {
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(Role.of("ADMIN"));
         admin.setRoles(roleSet);
+        User user = new User("Laci", "Laci", "123");
+        roleSet.clear();
+        roleSet.add(Role.of("USER"));
+        user.setRoles(roleSet);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        user = userService.create(user);
+        shoppingCartService.create(shoppingCart);
+        shoppingCart.setUserId(user.getId());
         userService.create(admin);
         resp.sendRedirect(req.getContextPath() + "/login");
     }
