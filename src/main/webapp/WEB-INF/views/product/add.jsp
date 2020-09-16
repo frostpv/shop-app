@@ -12,6 +12,7 @@
     <a href="${pageContext.request.contextPath}/users">Users</a> |
     <a href="${pageContext.request.contextPath}/orders">Orders list</a> |
     <a href="${pageContext.request.contextPath}/">Orders list</a> |
+    <a href="${pageContext.request.contextPath}/logout">Logout</a> |
 </p>
 <p>
     <form method="post" action="${pageContext.request.contextPath}/products/add">

@@ -11,6 +11,7 @@
     <a href="${pageContext.request.contextPath}/users">Users</a> |
     <a href="${pageContext.request.contextPath}/orders/list">Orders list</a> |
     <a href="${pageContext.request.contextPath}/">User part</a> |
+    <a href="${pageContext.request.contextPath}/logout">Logout</a> |
 </p>
 </body>
 </html>

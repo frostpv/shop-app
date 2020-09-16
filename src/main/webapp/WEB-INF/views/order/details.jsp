@@ -12,6 +12,7 @@
 <a href="${pageContext.request.contextPath}/users/registration">Regisration</a> |
 <a href="${pageContext.request.contextPath}/cart">Cart</a> |
 <a href="${pageContext.request.contextPath}/user/orders">Orders</a> |
+<a href="${pageContext.request.contextPath}/logout">Logout</a> |
 <table border="1">
     <tr>
         <td><strong>Product ID</strong></td>
