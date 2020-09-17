@@ -49,12 +49,8 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String servletPath = req.getServletPath();
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        if (!protectedUrls.containsKey(servletPath)) {
-            chain.doFilter(req, resp);
-            return;
-        }
-        User user = userService.get(userId);
-        if (isAuthorized(user, protectedUrls.get(servletPath))) {
+        if (!protectedUrls.containsKey(servletPath)
+                || isAuthorized(userService.get(userId), protectedUrls.get(servletPath))) {
             chain.doFilter(req, resp);
         } else {
             req.getRequestDispatcher("/WEB-INF/views/errors/denied.jsp")
