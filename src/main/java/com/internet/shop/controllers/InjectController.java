@@ -53,8 +53,8 @@ public class InjectController extends HttpServlet {
         roleSet.clear();
         roleSet.add(Role.of("USER"));
         user.setRoles(roleSet);
-        ShoppingCart shoppingCart = new ShoppingCart();
         user = userService.create(user);
+        ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCartService.create(shoppingCart);
         shoppingCart.setUserId(user.getId());
         userService.create(admin);
