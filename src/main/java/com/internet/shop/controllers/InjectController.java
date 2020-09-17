@@ -55,8 +55,8 @@ public class InjectController extends HttpServlet {
         user.setRoles(roleSet);
         user = userService.create(user);
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCartService.create(shoppingCart);
         shoppingCart.setUserId(user.getId());
+        shoppingCartService.create(shoppingCart);
         userService.create(admin);
         resp.sendRedirect(req.getContextPath() + "/login");
     }
