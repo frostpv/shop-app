@@ -1,11 +1,14 @@
 package com.internet.shop.controllers;
 
 import com.internet.shop.lib.Injector;
+import com.internet.shop.models.Role;
 import com.internet.shop.models.ShoppingCart;
 import com.internet.shop.models.User;
 import com.internet.shop.services.ShoppingCartService;
 import com.internet.shop.services.UserService;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +35,11 @@ public class RegistrationController extends HttpServlet {
         String pswRepeat = req.getParameter("psw-repeat");
         if (psw.equals(pswRepeat)) {
             User user = new User(name, login, psw);
-            ShoppingCart shoppingCart = new ShoppingCart();
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add(Role.of("USER"));
+            user.setRoles(roleSet);
             user = userService.create(user);
+            ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUserId(user.getId());
             shoppingCartService.create(shoppingCart);
             resp.sendRedirect(req.getContextPath() + "/users");

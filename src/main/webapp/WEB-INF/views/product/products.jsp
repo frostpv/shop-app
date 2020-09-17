@@ -13,6 +13,7 @@
 <a href="${pageContext.request.contextPath}/cart">Cart</a> |
 <a href="${pageContext.request.contextPath}/user/orders">Orders</a> |
 <a href="${pageContext.request.contextPath}/admin/index">Admin part</a> |
+<a href="${pageContext.request.contextPath}/logout">Logout</a> |
 <p>
 <table border="1">
     <tr>
