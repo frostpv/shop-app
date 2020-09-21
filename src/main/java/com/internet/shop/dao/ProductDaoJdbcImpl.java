@@ -42,12 +42,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             preparedStatement.setLong(1, item);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                long productId = resultSet.getLong("product_id");
-                String name = resultSet.getString("name");
-                double price = resultSet.getDouble("price");
-                Product product = new Product(name, price);
-                product.setId(productId);
-                return Optional.of(product);
+                return fetchProduct(resultSet);
             }
             return Optional.empty();
         } catch (SQLException e) {
@@ -91,17 +86,21 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Long productId = resultSet.getLong("product_id");
-                String name = resultSet.getString("name");
-                double price = resultSet.getDouble("price");
-                Product product = new Product(name, price);
-                product.setId(productId);
-                products.add(product);
+                products.add(fetchProduct(resultSet).get());
             }
         } catch (SQLException e) {
             throw new DataBaseProcessingException("All products error", e);
         }
         return products;
+    }
+
+    private Optional<Product> fetchProduct(ResultSet resultSet) throws SQLException {
+            long productId = resultSet.getLong("product_id");
+            String name = resultSet.getString("name");
+            double price = resultSet.getDouble("price");
+            Product product = new Product(name, price);
+            product.setId(productId);
+            return Optional.of(product);
     }
 }
 
