@@ -35,46 +35,46 @@ public class ProductDaoJdbcImpl implements ProductDao {
     }
 
     @Override
-    public Optional<Product> get(Long item) {
+    public Optional<Product> get(Long id) {
         String query = "SELECT * FROM products WHERE product_id = ? AND deleted = false ";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, item);
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return fetchProduct(resultSet);
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Can`t get product with id " + item, e);
+            throw new DataBaseProcessingException("Can`t get product with id " + id, e);
         }
     }
 
     @Override
-    public Product update(Product item) {
+    public Product update(Product product) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "UPDATE products SET name = ?, price = ? WHERE product_id = ? AND deleted = false ";
             PreparedStatement preparedStatement
                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, item.getName());
-            preparedStatement.setDouble(2, item.getPrice());
-            preparedStatement.setLong(3, item.getId());
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setLong(3, product.getId());
             preparedStatement.executeUpdate();
-            return item;
+            return product;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product " + item + " not updated", e);
+            throw new DataBaseProcessingException("Product " + product + " not updated", e);
         }
     }
 
     @Override
-    public boolean delete(Long item) {
+    public boolean delete(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "UPDATE products SET deleted = true WHERE product_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, item);
+            preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product with id - " + item + " not deleted", e);
+            throw new DataBaseProcessingException("Product with id - " + id + " not deleted", e);
         }
     }
 
