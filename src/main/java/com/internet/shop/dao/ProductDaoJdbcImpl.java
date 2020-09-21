@@ -16,21 +16,21 @@ import java.util.Optional;
 @Dao
 public class ProductDaoJdbcImpl implements ProductDao {
     @Override
-    public Product create(Product item) {
+    public Product create(Product product) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "INSERT INTO products(name, price) VALUES(?, ?)";
             PreparedStatement preparedStatement
                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, item.getName());
-            preparedStatement.setDouble(2, item.getPrice());
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                item.setId(resultSet.getLong(1));
+                product.setId(resultSet.getLong(1));
             }
-            return item;
+            return product;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product " + item + " was not created", e);
+            throw new DataBaseProcessingException("Product " + product + " was not created", e);
         }
     }
 
@@ -53,7 +53,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product update(Product item) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "UPDATE products SET name = ?, price = ? WHERE product_id = ?";
+            String query = "UPDATE products SET name = ?, price = ? WHERE product_id = ? AND deleted = false ";
             PreparedStatement preparedStatement
                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, item.getName());
