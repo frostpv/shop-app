@@ -25,3 +25,31 @@ INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('USER');
 
 ALTER TABLE `internet_shop`.`users`
 CHANGE COLUMN `role_id` `deleted` TINYINT NULL DEFAULT 0 ;
+
+CREATE TABLE `internet_shop`.`user_roles` (
+  `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(11) NULL,
+  `role_id` BIGINT(11) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_id_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_User_role_idx` (`role_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `internet_shop`.`users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_User_role`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `internet_shop`.`roles` (`role_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+    CREATE TABLE `internet_shop`.`shoping_carts` (
+  `id_shoping_cart` BIGINT(11) NOT NULL,
+  `id_user` VARCHAR(11) NULL,
+  PRIMARY KEY (`id_shoping_cart`),
+  CONSTRAINT `fk_id_user`
+    FOREIGN KEY (`id_shoping_cart`)
+    REFERENCES `internet_shop`.`users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
