@@ -14,3 +14,11 @@ CREATE TABLE `internet_shop`.`users` (
   `user_pass` VARCHAR(225) NULL,
   `role_id` BIGINT(11) NULL,
   PRIMARY KEY (`user_id`));
+
+  CREATE TABLE `internet_shop`.`roles` (
+  `role_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `role_name` VARCHAR(225) NULL,
+  PRIMARY KEY (`role_id`));
+
+INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('ADMIN');
+INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('USER');
