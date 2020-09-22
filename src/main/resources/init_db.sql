@@ -82,3 +82,20 @@ CREATE TABLE `internet_shop`.`user_roles` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+CREATE TABLE `internet_shop`.`shopping_carts_products` (
+  `id_shopping_carts_products` BIGINT(11) NOT NULL,
+  `shopping_carts_id` BIGINT(11) NULL,
+  `product_id` BIGINT(11) NULL,
+  PRIMARY KEY (`id_shopping_carts_products`),
+  INDEX `fk_shoping_cart_idx` (`shopping_carts_id` ASC) VISIBLE,
+  INDEX `fk_product_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_shoping_cart`
+    FOREIGN KEY (`shopping_carts_id`)
+    REFERENCES `internet_shop`.`shoping_carts` (`id_shoping_cart`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `internet_shop`.`products` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
