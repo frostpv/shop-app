@@ -7,3 +7,10 @@ CREATE TABLE `internet_shop`.`products` (
   PRIMARY KEY (`product_id`));
 INSERT INTO `internet_shop`.`products` (`name`, `price`, `deleted`) VALUES ('AuduQ3', '50000', '0');
 INSERT INTO `internet_shop`.`products` (`name`, `price`, `deleted`) VALUES ('AudiQ5', '70000', '0');
+CREATE TABLE `internet_shop`.`users` (
+  `user_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(225) NULL,
+  `user_login` VARCHAR(225) NULL,
+  `user_pass` VARCHAR(225) NULL,
+  `role_id` BIGINT(11) NULL,
+  PRIMARY KEY (`user_id`));
