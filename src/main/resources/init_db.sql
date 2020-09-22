@@ -63,3 +63,22 @@ CREATE TABLE `internet_shop`.`user_roles` (
     REFERENCES `internet_shop`.`users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+    CREATE TABLE `internet_shop`.`orders_products` (
+  `id_orders_products` BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `order_id` BIGINT(11) NULL,
+  `product_id` BIGINT(11) NULL,
+  PRIMARY KEY (`id_orders_products`),
+  INDEX `fk_order_id_idx` (`order_id` ASC) VISIBLE,
+  INDEX `fk_product_id_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_order_id`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `internet_shop`.`orders` (`order_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product_id`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `internet_shop`.`products` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
