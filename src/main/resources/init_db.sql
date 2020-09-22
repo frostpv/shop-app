@@ -53,3 +53,13 @@ CREATE TABLE `internet_shop`.`user_roles` (
     REFERENCES `internet_shop`.`users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+    CREATE TABLE `internet_shop`.`orders` (
+  `order_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(11) NULL,
+  PRIMARY KEY (`order_id`),
+  CONSTRAINT `fk_order_user_id`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `internet_shop`.`users` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
