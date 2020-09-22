@@ -22,3 +22,6 @@ CREATE TABLE `internet_shop`.`users` (
 
 INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('ADMIN');
 INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('USER');
+
+ALTER TABLE `internet_shop`.`users`
+CHANGE COLUMN `role_id` `deleted` TINYINT NULL DEFAULT 0 ;
