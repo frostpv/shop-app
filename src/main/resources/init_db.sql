@@ -83,20 +83,20 @@ CREATE TABLE `internet_shop`.`user_roles` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE TABLE `internet_shop`.`shopping_carts_products` (
-  `id_shopping_carts_products` BIGINT(11) NOT NULL,
-  `shopping_carts_id` BIGINT(11) NULL,
-  `product_id` BIGINT(11) NULL,
-  PRIMARY KEY (`id_shopping_carts_products`),
-  INDEX `fk_shoping_cart_idx` (`shopping_carts_id` ASC) VISIBLE,
-  INDEX `fk_product_idx` (`product_id` ASC) VISIBLE,
+CREATE TABLE `internet_shop`.`shoping_cart_products` (
+  `id_shoping_cart_products` BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `id_cart` BIGINT(11) NULL,
+  `id_product` BIGINT(11) NULL,
+  PRIMARY KEY (`id_shoping_cart_products`),
+  INDEX `fk_shoping_cart_idx` (`id_cart` ASC) VISIBLE,
+  INDEX `fk_product_idx` (`id_product` ASC) VISIBLE,
   CONSTRAINT `fk_shoping_cart`
-    FOREIGN KEY (`shopping_carts_id`)
-    REFERENCES `internet_shop`.`shoping_carts` (`id_shoping_cart`)
+    FOREIGN KEY (`id_cart`)
+    REFERENCES `internet_shop`.`shoping_carts` (`id_shoping_carts`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_product`
-    FOREIGN KEY (`product_id`)
+    FOREIGN KEY (`id_product`)
     REFERENCES `internet_shop`.`products` (`product_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
