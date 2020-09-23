@@ -44,12 +44,13 @@ CREATE TABLE `internet_shop`.`user_roles` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-    CREATE TABLE `internet_shop`.`shoping_carts` (
-  `id_shoping_cart` BIGINT(11) NOT NULL,
-  `id_user` VARCHAR(11) NULL,
-  PRIMARY KEY (`id_shoping_cart`),
-  CONSTRAINT `fk_id_user`
-    FOREIGN KEY (`id_shoping_cart`)
+ CREATE TABLE `internet_shop`.`shoping_carts` (
+  `id_shoping_carts` INT NOT NULL AUTO_INCREMENT,
+  `id_user` BIGINT(11) NULL,
+  PRIMARY KEY (`id_shoping_carts`),
+  INDEX `is_user_idx` (`id_user` ASC) VISIBLE,
+  CONSTRAINT `is_user`
+    FOREIGN KEY (`id_user`)
     REFERENCES `internet_shop`.`users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
@@ -102,3 +103,5 @@ CREATE TABLE `internet_shop`.`shopping_carts_products` (
 
     ALTER TABLE `internet_shop`.`orders`
 ADD COLUMN `deleted` TINYINT NULL DEFAULT 0 AFTER `user_id`;
+
+
