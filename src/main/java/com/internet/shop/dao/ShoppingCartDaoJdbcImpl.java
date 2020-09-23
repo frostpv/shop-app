@@ -52,7 +52,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Shoping cart " + shoppingCart + " was not created", e);
         }
-        return shoppingCart;
+        return addProductsIntoSHoppingCart(shoppingCart);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
 
     private ShoppingCart addProductsIntoSHoppingCart(ShoppingCart shoppingCart) {
-        String query = "INSERT INTO shoping_cart_products VALUES (?, ?)";
+        String query = "INSERT INTO shoping_cart_products (id_cart, id_product) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, shoppingCart.getId());

@@ -6,7 +6,6 @@ import com.internet.shop.models.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
 
-@Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
