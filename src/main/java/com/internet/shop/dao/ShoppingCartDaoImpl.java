@@ -1,7 +1,6 @@
 package com.internet.shop.dao;
 
 import com.internet.shop.db.Storage;
-import com.internet.shop.lib.Dao;
 import com.internet.shop.models.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
