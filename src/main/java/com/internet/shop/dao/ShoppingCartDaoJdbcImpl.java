@@ -57,6 +57,22 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public Optional<ShoppingCart> get(Long id) {
+        ShoppingCart shoppingCart = null;
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "SELECT * FROM internet_shop.shoping_cart WHERE id_shoping_cart = ? AND deleted = FALSE";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                shoppingCart = new ShoppingCart();
+                shoppingCart.setId(id);
+                shoppingCart.setUserId(resultSet.getLong("id_user"));
+                shoppingCart.setProducts(getCartProducts(shoppingCart.getId()));
+                return Optional.of(shoppingCart);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Shoping cart " + shoppingCart + " was not created", e);
+        }
         return Optional.empty();
     }
 
