@@ -99,3 +99,6 @@ CREATE TABLE `internet_shop`.`shopping_carts_products` (
     REFERENCES `internet_shop`.`products` (`product_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+    ALTER TABLE `internet_shop`.`orders`
+ADD COLUMN `deleted` TINYINT NULL DEFAULT 0 AFTER `user_id`;
