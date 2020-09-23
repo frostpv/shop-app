@@ -24,7 +24,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 shoppingCart = new ShoppingCart();
                 shoppingCart.setId(resultSet.getLong("id_shoping_cart"));
                 shoppingCart.setUserId(userId);
@@ -63,7 +63,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 shoppingCart = new ShoppingCart();
                 shoppingCart.setId(id);
                 shoppingCart.setUserId(resultSet.getLong("id_user"));
@@ -78,17 +78,77 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public List<ShoppingCart> getAll() {
-        return null;
+        List<ShoppingCart> shoppingCarts = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "SELECT * FROM shoping_cart WHERE deleted = FALSE";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ShoppingCart shoppingCart = new ShoppingCart();
+                shoppingCart.setId(resultSet.getLong("id_shoping_cart"));
+                shoppingCart.setUserId(resultSet.getLong("id_user"));
+                shoppingCart.setProducts(getCartProducts(shoppingCart.getId()));
+                shoppingCarts.add(shoppingCart);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Shopping cart list was not created", e);
+        }
+        return shoppingCarts;
     }
 
     @Override
     public ShoppingCart update(ShoppingCart shoppingCart) {
-        return null;
+
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "UPDATE shoping_cart SET id_user = ? WHERE id_shoping_cart=? AND deleted = FALSE";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, shoppingCart.getUserId());
+            preparedStatement.setString(2, shoppingCart.getId().toString());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Shopping "+ shoppingCart +" was not created updated", e);
+        }
+        deleteProductsInShoppingCart(shoppingCart.getId());
+        return addProductsIntoSHoppingCart(shoppingCart);
+    }
+
+
+    private ShoppingCart addProductsIntoSHoppingCart(ShoppingCart shoppingCart) {
+        String query = "INSERT INTO shoping_cart_products VALUES (?, ?)";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, shoppingCart.getId());
+            for (Product product : shoppingCart.getProducts()) {
+                statement.setLong(2, product.getId());
+                statement.executeUpdate();
+            }
+            return shoppingCart;
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Failed to add the products to" + shoppingCart, e);
+        }
+    }
+
+    private boolean deleteProductsInShoppingCart(Long id) {
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "DELETE FROM shoping_cart_products WHERE id_cart = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            return preparedStatement.executeUpdate() !=0;
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Shopping product in cart " + id + " was not deleted", e);
+        }
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "UPDATE shoping_cart SET deleted = TRUE WHERE id_shoping_cart = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            return preparedStatement.executeUpdate() != 0;
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Shopping cart is was not deleted", e);
+        }
     }
 
     private List<Product> getCartProducts(Long id) {
