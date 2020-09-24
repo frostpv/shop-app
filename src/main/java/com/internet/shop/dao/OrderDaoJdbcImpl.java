@@ -114,7 +114,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Order order = new Order(resultSet.getLong("order_id"));
-                order.setIdUser(resultSet.getLong("id_user"));
+                order.setIdUser(resultSet.getLong("user_id"));
                 order.setProducts(getOrderProducts(order.getId()));
                 orders.add(order);
             }
