@@ -32,7 +32,6 @@ public class WebShopApp {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setProducts(productList);
         shoppingCart.setUserId(1L);
-        //shoppingCart.setId(3);
         shoppingCartService.create(shoppingCart);
     }
 }
