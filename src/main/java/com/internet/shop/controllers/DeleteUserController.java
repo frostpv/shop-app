@@ -30,9 +30,9 @@ public class DeleteUserController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String id = req.getParameter("id");
-        userService.delete(Long.parseLong(id));
         ShoppingCart userShoppingCart = shoppingCartService.getByUserId(Long.parseLong(id));
         shoppingCartService.delete(userShoppingCart);
+        userService.delete(Long.parseLong(id));
         resp.sendRedirect(req.getContextPath() + "/users");
     }
 }

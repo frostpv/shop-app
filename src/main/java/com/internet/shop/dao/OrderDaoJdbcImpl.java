@@ -27,7 +27,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Order create(Order order) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "INSERT INTO `internet_shop`.`orders` (`user_id`) VALUES (?)";
+            String query = "INSERT INTO orders (user_id) VALUES (?)";
             PreparedStatement preparedStatement
                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, order.getIdUser());
@@ -37,7 +37,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 order.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shoping cart "
+            throw new DataBaseProcessingException("Order "
                     + order + " was not created", e);
         }
         return addProductsIntoOrder(order);
@@ -47,12 +47,13 @@ public class OrderDaoJdbcImpl implements OrderDao {
         String query = "INSERT INTO orders_products (order_id, product_id) "
                 + "VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, order.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             for (Product product : order.getProducts()) {
-                statement.setLong(2, product.getId());
-                statement.executeUpdate();
+                preparedStatement.setLong(1, order.getId());
+                preparedStatement.setLong(2, product.getId());
+                preparedStatement.addBatch();
             }
+            preparedStatement.executeBatch();
             return order;
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Failed to add the products to"
@@ -62,34 +63,35 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> get(Long id) {
-        Order order = null;
+        Order order = new Order();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM internet_shop.shoping_cart "
-                    + "WHERE id_shoping_cart = ? AND deleted = FALSE";
+            String query = "SELECT * FROM orders "
+                    + "WHERE order_id = ? AND deleted = FALSE";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                order = new Order(resultSet.getLong("id_user"));
+                order.setIdUser(resultSet.getLong("id_user"));
                 order.setId(id);
-                order.setProducts(getOrderProducts(order.getId()));
-                return Optional.of(order);
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Shoping cart "
                     + order + " was not created", e);
         }
-        return Optional.empty();
+        getOrderProducts(order);
+        return Optional.of(order);
     }
 
-    List<Product> getOrderProducts(Long id){
+    private void getOrderProducts(Order order){
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM products JOIN shoping_cart_products \n"
-                    + "ON products.product_id = shoping_cart_products.id_product \n"
-                    + "WHERE shoping_cart_products.id_cart=?;";
+            String query = "SELECT * FROM products JOIN orders_products "
+                    + "ON products.product_id = orders_products.product_id "
+                    + "WHERE orders_products.order_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, order.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Product product = new Product(
@@ -100,9 +102,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
             }
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Order "
-                    + id + " have problem which product list", e);
+                    + order + " have problem which product list", e);
         }
-        return products;
+        order.setProducts(products);
     }
 
     @Override
@@ -115,29 +117,18 @@ public class OrderDaoJdbcImpl implements OrderDao {
             while (resultSet.next()) {
                 Order order = new Order(resultSet.getLong("order_id"));
                 order.setIdUser(resultSet.getLong("user_id"));
-                order.setProducts(getOrderProducts(order.getId()));
+                //order.setProducts(getOrderProducts(order.getId()));
                 orders.add(order);
             }
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Order list was not created", e);
         }
+        orders.forEach(this::getOrderProducts);
         return orders;
     }
 
     @Override
     public Order update(Order order) {
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "UPDATE orders "
-                    + "SET user_id = ? WHERE order_id =?"
-                    + "AND deleted = FALSE";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, order.getIdUser());
-            preparedStatement.setString(2, order.getId().toString());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping " + order
-                    + " was not created updated", e);
-        }
         deleteProductsInOrder(order.getId());
         return addProductsIntoOrder(order);
     }
