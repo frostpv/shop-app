@@ -31,19 +31,12 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                user.setId(resultSet.getLong("user_id"));
-                user.setName(resultSet.getString("user_name"));
-                user.setLogin(resultSet.getString("user_login"));
-                user.setPassword(resultSet.getString("user_pass"));
-                Role role = Role.of(resultSet.getString("role_name"));
-                role.setId(resultSet.getLong("role_id"));
-                roles.add(role);
+                user = setUserFields(resultSet);
+                roles.add(getRoleWichId(resultSet));
             }
 
             while (resultSet.next()) {
-                Role role = Role.of(resultSet.getString("role_name"));
-                role.setId(resultSet.getLong("role_id"));
-                roles.add(role);
+                roles.add(getRoleWichId(resultSet));
                 user.setRoles(roles);
             }
             user.setRoles(roles);
@@ -53,6 +46,8 @@ public class UserDaoJdbcImpl implements UserDao {
                     + "is not found", e);
         }
     }
+
+
 
     @Override
     public User create(User user) {
@@ -123,18 +118,11 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                user.setId(resultSet.getLong("user_id"));
-                user.setName(resultSet.getString("user_name"));
-                user.setLogin(resultSet.getString("user_login"));
-                user.setPassword(resultSet.getString("user_pass"));
-                Role role = Role.of(resultSet.getString("role_name"));
-                role.setId(resultSet.getLong("role_id"));
-                roles.add(role);
+                user = setUserFields(resultSet);
+                roles.add(getRoleWichId(resultSet));
             }
             while (resultSet.next()) {
-                Role role = Role.of(resultSet.getString("role_name"));
-                role.setId(resultSet.getLong("role_id"));
-                roles.add(role);
+                roles.add(getRoleWichId(resultSet));
                 user.setRoles(roles);
             }
             user.setRoles(roles);
@@ -153,11 +141,7 @@ public class UserDaoJdbcImpl implements UserDao {
                      ConnectionUtil.getConnection().prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getLong("user_id"));
-                user.setName(resultSet.getString("user_name"));
-                user.setLogin(resultSet.getString("user_login"));
-                user.setPassword(resultSet.getString("user_pass"));
+                User user = setUserFields(resultSet);
                 users.add(user);
             }
         } catch (SQLException throwables) {
@@ -178,9 +162,7 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Role role = Role.of(resultSet.getString("role_name"));
-                role.setId(resultSet.getLong("role_id"));
-                roles.add(role);
+                roles.add(getRoleWichId(resultSet));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -209,17 +191,6 @@ public class UserDaoJdbcImpl implements UserDao {
         return user;
     }
 
-    private void deleteUserRoles(Long id) {
-        String query = "DELETE * FROM user_roles WHERE user_id = ?";
-        try (PreparedStatement preparedStatement =
-                     ConnectionUtil.getConnection().prepareStatement(query)) {
-            preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
     @Override
     public boolean delete(Long id) {
         String query = "UPDATE users SET deleted = true WHERE user_id = ?";
@@ -231,5 +202,31 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException throwables) {
             throw new DataBaseProcessingException("cant to deleted", throwables);
         }
+    }
+
+    private void deleteUserRoles(Long id) {
+        String query = "DELETE * FROM user_roles WHERE user_id = ?";
+        try (PreparedStatement preparedStatement =
+                     ConnectionUtil.getConnection().prepareStatement(query)) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private User setUserFields(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getLong("user_id"));
+        user.setName(resultSet.getString("user_name"));
+        user.setLogin(resultSet.getString("user_login"));
+        user.setPassword(resultSet.getString("user_pass"));
+        return user;
+    }
+
+    private Role getRoleWichId(ResultSet resultSet) throws SQLException {
+        Role role = Role.of(resultSet.getString("role_name"));
+        role.setId(resultSet.getLong("role_id"));
+        return role;
     }
 }
