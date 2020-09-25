@@ -121,36 +121,6 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         return addProductsIntoSHoppingCart(shoppingCart);
     }
 
-    private ShoppingCart addProductsIntoSHoppingCart(ShoppingCart shoppingCart) {
-        String query = "INSERT INTO shoping_cart_products (id_cart, id_product) "
-                + "VALUES (?, ?)";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-
-            for (Product product : shoppingCart.getProducts()) {
-                statement.setLong(1, shoppingCart.getId());
-                statement.setLong(2, product.getId());
-                statement.executeUpdate();
-            }
-            return shoppingCart;
-        } catch (SQLException e) {
-            throw new DataBaseProcessingException("Failed to add the products to"
-                    + shoppingCart, e);
-        }
-    }
-
-    private boolean deleteProductsInShoppingCart(Long id) {
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "DELETE FROM shoping_cart_products WHERE id_cart = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, id);
-            return preparedStatement.executeUpdate() != 0;
-        } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping product in cart "
-                    + id + " was not deleted", e);
-        }
-    }
-
     @Override
     public boolean delete(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -185,6 +155,36 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                     + id + " have problem which product list", e);
         }
         return products;
+    }
+
+    private boolean deleteProductsInShoppingCart(Long id) {
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "DELETE FROM shoping_cart_products WHERE id_cart = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            return preparedStatement.executeUpdate() != 0;
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Shopping product in cart "
+                    + id + " was not deleted", e);
+        }
+    }
+
+    private ShoppingCart addProductsIntoSHoppingCart(ShoppingCart shoppingCart) {
+        String query = "INSERT INTO shoping_cart_products (id_cart, id_product) "
+                + "VALUES (?, ?)";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            for (Product product : shoppingCart.getProducts()) {
+                statement.setLong(1, shoppingCart.getId());
+                statement.setLong(2, product.getId());
+                statement.executeUpdate();
+            }
+            return shoppingCart;
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Failed to add the products to"
+                    + shoppingCart, e);
+        }
     }
 }
 
