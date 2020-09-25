@@ -51,7 +51,8 @@ public class UserDaoJdbcImpl implements UserDao {
     public User create(User user) {
         String query = "INSERT INTO users (user_name, user_login, user_pass) "
                 + "VALUES (?, ?, ?)";
-        try (PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement
+                     = ConnectionUtil.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());

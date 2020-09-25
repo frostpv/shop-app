@@ -21,7 +21,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         ShoppingCart shoppingCart = null;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT id_shoping_cart "
-                    + "FROM shoping_cart"
+                    + "FROM shoping_cart "
                     + " WHERE id_user = ? AND deleted = FALSE";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, userId);
@@ -42,7 +42,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
-        try (Connection connection = ConnectionUtil.getConnection()) {
+         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "INSERT INTO shoping_cart (id_user) VALUES (?)";
             PreparedStatement preparedStatement
                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
