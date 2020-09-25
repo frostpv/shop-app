@@ -19,9 +19,23 @@ import java.util.stream.Collectors;
 public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public List<Order> getUserOrders(Long userId) {
-       return getAll().stream()
-               .filter(order -> order.getIdUser().equals(userId))
-               .collect(Collectors.toList());
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String query = "SELECT * FROM orders WHERE deleted = FALSE AND user_id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Order order = new Order(resultSet.getLong("order_id"));
+                order.setIdUser(resultSet.getLong("user_id"));
+                //order.setProducts(getOrderProducts(order.getId()));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("Order list was not created", e);
+        }
+        orders.forEach(this::getOrderProducts);
+        return orders;
     }
 
     @Override
