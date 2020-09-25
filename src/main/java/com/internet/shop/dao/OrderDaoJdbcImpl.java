@@ -25,14 +25,18 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.setLong(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Order order = new Order(resultSet.getLong("order_id"));
+                Order order = new Order();
+                order.setId(resultSet.getLong("order_id"));
                 order.setIdUser(resultSet.getLong("user_id"));
                 orders.add(order);
             }
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Order list was not created", e);
         }
-        orders.forEach(this::getOrderProducts);
+
+        for (Order order : orders) {
+            getOrderProducts(order);
+        }
         return orders;
     }
 
