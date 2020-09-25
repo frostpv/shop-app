@@ -63,7 +63,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     public Optional<ShoppingCart> get(Long id) {
         ShoppingCart shoppingCart = null;
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM internet_shop.shoping_cart "
+            String query = "SELECT * FROM shoping_cart "
                     + "WHERE id_shoping_cart = ? AND deleted = FALSE";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
@@ -166,9 +166,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     private List<Product> getCartProducts(Long id) {
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM products JOIN shoping_cart_products \n"
-                    + "ON products.product_id = shoping_cart_products.id_product \n"
-                    + "WHERE shoping_cart_products.id_cart=?;";
+            String query = "SELECT * FROM products JOIN shoping_cart_products "
+                    + "ON products.product_id = shoping_cart_products.id_product "
+                    + "WHERE shoping_cart_products.id_cart=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
