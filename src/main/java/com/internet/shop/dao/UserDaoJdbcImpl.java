@@ -47,8 +47,6 @@ public class UserDaoJdbcImpl implements UserDao {
         }
     }
 
-
-
     @Override
     public User create(User user) {
         String query = "INSERT INTO users (user_name, user_login, user_pass) "
@@ -102,7 +100,6 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     @Override
@@ -160,7 +157,6 @@ public class UserDaoJdbcImpl implements UserDao {
                      ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, user.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()) {
                 roles.add(getRoleWichId(resultSet));
             }
@@ -199,8 +195,8 @@ public class UserDaoJdbcImpl implements UserDao {
                      ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
-        } catch (SQLException throwables) {
-            throw new DataBaseProcessingException("cant to deleted", throwables);
+        } catch (SQLException e) {
+            throw new DataBaseProcessingException("cant to deleted", e);
         }
     }
 
