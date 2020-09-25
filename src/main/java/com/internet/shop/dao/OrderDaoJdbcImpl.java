@@ -59,7 +59,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return addProductsIntoOrder(order);
     }
 
-    private Order addProductsIntoOrder(Order order){
+    private Order addProductsIntoOrder(Order order) {
         String query = "INSERT INTO orders_products (order_id, product_id) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -100,7 +100,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return Optional.of(order);
     }
 
-    private void getOrderProducts(Order order){
+    private void getOrderProducts(Order order) {
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM products JOIN orders_products "
