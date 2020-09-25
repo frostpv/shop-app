@@ -123,11 +123,12 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     private ShoppingCart addProductsIntoSHoppingCart(ShoppingCart shoppingCart) {
         String query = "INSERT INTO shoping_cart_products (id_cart, id_product) "
-                + "VALUES (?, ?);";
+                + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, shoppingCart.getId());
+
             for (Product product : shoppingCart.getProducts()) {
+                statement.setLong(1, shoppingCart.getId());
                 statement.setLong(2, product.getId());
                 statement.executeUpdate();
             }
