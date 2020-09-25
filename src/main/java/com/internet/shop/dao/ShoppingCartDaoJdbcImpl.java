@@ -21,7 +21,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         ShoppingCart shoppingCart = null;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT id_shoping_cart "
-                    + "FROM internet_shop.shoping_cart"
+                    + "FROM shoping_cart"
                     + " WHERE id_user = ? AND deleted = FALSE";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, userId);

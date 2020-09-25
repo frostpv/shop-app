@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Dao
 public class OrderDaoJdbcImpl implements OrderDao {
@@ -28,7 +27,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
             while (resultSet.next()) {
                 Order order = new Order(resultSet.getLong("order_id"));
                 order.setIdUser(resultSet.getLong("user_id"));
-                //order.setProducts(getOrderProducts(order.getId()));
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -59,7 +57,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     private Order addProductsIntoOrder(Order order){
         String query = "INSERT INTO orders_products (order_id, product_id) "
-                + "VALUES (?, ?);";
+                + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             for (Product product : order.getProducts()) {

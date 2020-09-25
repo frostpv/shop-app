@@ -104,19 +104,18 @@ public class UserDaoJdbcImpl implements UserDao {
         User user = new User();
         Set<Role> roles = new HashSet<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM users \n" +
-                    "        JOIN user_roles ON users.user_id = user_roles.user_id\n" +
-                    "        JOIN roles ON user_roles.role_id = roles.role_id\n" +
-                    "        WHERE users.user_id = ? AND deleted = false;";
+            String query = "SELECT * FROM users " +
+                    "        JOIN user_roles ON users.user_id = user_roles.user_id" +
+                    "        JOIN roles ON user_roles.role_id = roles.role_id" +
+                    "        WHERE users.user_id = ? AND deleted = false";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-
+                user.setId(resultSet.getLong("user_id"));
                 user.setName(resultSet.getString("user_name"));
                 user.setLogin(resultSet.getString("user_login"));
                 user.setPassword(resultSet.getString("user_pass"));
-                user.setId(resultSet.getLong("user_id"));
                 Role role = Role.of(resultSet.getString("role_name"));
                 role.setId(resultSet.getLong("role_id"));
                 roles.add(role);
