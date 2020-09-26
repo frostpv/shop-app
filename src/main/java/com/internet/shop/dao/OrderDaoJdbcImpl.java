@@ -53,7 +53,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 order.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Order witch id "
+            throw new DataBaseProcessingException("Order with id "
                     + order.getId() + " was not created", e);
         }
         return addProductsIntoOrder(order);
@@ -130,7 +130,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Order product in order "
+            throw new DataBaseProcessingException("Product list in order with id "
                     + id + " was not deleted", e);
         }
     }
