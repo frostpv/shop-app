@@ -171,7 +171,6 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-
             for (Product product : shoppingCart.getProducts()) {
                 statement.setLong(1, shoppingCart.getId());
                 statement.setLong(2, product.getId());
