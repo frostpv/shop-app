@@ -75,8 +75,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 return Optional.empty();
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shoping cart "
-                    + order + " was not created", e);
+            throw new DataBaseProcessingException("Order with id "
+                    + id + " was not created", e);
         }
         getOrderProducts(order);
         return Optional.of(order);
