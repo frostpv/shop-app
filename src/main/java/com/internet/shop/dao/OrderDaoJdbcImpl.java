@@ -35,7 +35,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                     + " was not created, user id: " + userId, e);
         }
         for (Order order : orders) {
-            getOrderProducts(order);
+            setOrderProductsFromDb(order);
         }
         return orders;
     }
@@ -78,7 +78,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             throw new DataProcessingException("Order with id "
                     + id + " was not created", e);
         }
-        getOrderProducts(order);
+        setOrderProductsFromDb(order);
         return Optional.of(order);
     }
 
@@ -99,7 +99,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             throw new DataProcessingException("All orders order list was not created", e);
         }
         for (Order order : orders) {
-            getOrderProducts(order);
+            setOrderProductsFromDb(order);
         }
         return orders;
     }
@@ -154,7 +154,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         }
     }
 
-    private void getOrderProducts(Order order) {
+    private void setOrderProductsFromDb(Order order) {
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM products JOIN orders_products "
