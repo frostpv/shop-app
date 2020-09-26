@@ -33,7 +33,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 return Optional.of(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shoping cart by user " + userId
+            throw new DataBaseProcessingException("Shopping cart by user id" + userId
                     + " was not found", e);
         }
         return Optional.empty();
