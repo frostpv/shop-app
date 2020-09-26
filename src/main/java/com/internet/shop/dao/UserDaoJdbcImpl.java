@@ -72,38 +72,6 @@ public class UserDaoJdbcImpl implements UserDao {
         return user;
     }
 
-    private void setIdToRoles(Set<Role> roles) {
-        String query = "SELECT * FROM roles";
-        try (PreparedStatement preparedStatement =
-                     ConnectionUtil.getConnection().prepareStatement(query)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                for (Role role : roles) {
-                    if (role.getRoleName().name().equals(resultSet.getString("role_name"))) {
-                        role.setId(resultSet.getLong("role_id"));
-                    }
-                }
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    private void addRolesToUser(User user) {
-        String query = "INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)";
-        try (PreparedStatement preparedStatement =
-                     ConnectionUtil.getConnection().prepareStatement(query)) {
-            for (Role role : user.getRoles()) {
-                preparedStatement.setLong(1, user.getId());
-                preparedStatement.setLong(2, role.getId());
-                preparedStatement.addBatch();
-            }
-            preparedStatement.executeBatch();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
     @Override
     public Optional<User> get(Long id) {
         User user = new User();
@@ -150,24 +118,6 @@ public class UserDaoJdbcImpl implements UserDao {
         }
         users.forEach(this::getUserRoles);
         return users;
-    }
-
-    private void getUserRoles(User user) {
-        Set<Role> roles = new HashSet<>();
-        String query = "SELECT * FROM user_roles "
-                + "JOIN roles ON roles.role_id = user_roles.role_id "
-                + "WHERE user_id = ?";
-        try (PreparedStatement preparedStatement =
-                     ConnectionUtil.getConnection().prepareStatement(query)) {
-            preparedStatement.setLong(1, user.getId());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                roles.add(getRoleWichId(resultSet));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        user.setRoles(roles);
     }
 
     @Override
@@ -228,5 +178,55 @@ public class UserDaoJdbcImpl implements UserDao {
         Role role = Role.of(resultSet.getString("role_name"));
         role.setId(resultSet.getLong("role_id"));
         return role;
+    }
+
+    private void setIdToRoles(Set<Role> roles) {
+        String query = "SELECT * FROM roles";
+        try (PreparedStatement preparedStatement =
+                     ConnectionUtil.getConnection().prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                for (Role role : roles) {
+                    if (role.getRoleName().name().equals(resultSet.getString("role_name"))) {
+                        role.setId(resultSet.getLong("role_id"));
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private void getUserRoles(User user) {
+        Set<Role> roles = new HashSet<>();
+        String query = "SELECT * FROM user_roles "
+                + "JOIN roles ON roles.role_id = user_roles.role_id "
+                + "WHERE user_id = ?";
+        try (PreparedStatement preparedStatement =
+                     ConnectionUtil.getConnection().prepareStatement(query)) {
+            preparedStatement.setLong(1, user.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                roles.add(getRoleWichId(resultSet));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        user.setRoles(roles);
+    }
+
+    private void addRolesToUser(User user) {
+        String query = "INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)";
+        try (PreparedStatement preparedStatement =
+                     ConnectionUtil.getConnection().prepareStatement(query)) {
+            for (Role role : user.getRoles()) {
+                preparedStatement.setLong(1, user.getId());
+                preparedStatement.setLong(2, role.getId());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
