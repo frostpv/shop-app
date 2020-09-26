@@ -32,12 +32,12 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = setUserFields(resultSet);
-                roles.add(getRoleWichId(resultSet));
+                roles.add(getRolesWithId(resultSet));
             } else {
                 return Optional.empty();
             }
             while (resultSet.next()) {
-                roles.add(getRoleWichId(resultSet));
+                roles.add(getRolesWithId(resultSet));
                 user.setRoles(roles);
             }
             user.setRoles(roles);
@@ -86,12 +86,12 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = setUserFields(resultSet);
-                roles.add(getRoleWichId(resultSet));
+                roles.add(getRolesWithId(resultSet));
             } else {
                 return Optional.empty();
             }
             while (resultSet.next()) {
-                roles.add(getRoleWichId(resultSet));
+                roles.add(getRolesWithId(resultSet));
                 user.setRoles(roles);
             }
             user.setRoles(roles);
@@ -174,7 +174,7 @@ public class UserDaoJdbcImpl implements UserDao {
         return user;
     }
 
-    private Role getRoleWichId(ResultSet resultSet) throws SQLException {
+    private Role getRolesWithId(ResultSet resultSet) throws SQLException {
         Role role = Role.of(resultSet.getString("role_name"));
         role.setId(resultSet.getLong("role_id"));
         return role;
@@ -207,7 +207,7 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setLong(1, user.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                roles.add(getRoleWichId(resultSet));
+                roles.add(getRolesWithId(resultSet));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
