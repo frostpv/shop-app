@@ -1,6 +1,6 @@
 package com.internet.shop.util;
 
-import com.internet.shop.exceptions.DataBaseProcessingException;
+import com.internet.shop.exceptions.DataProcessingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,7 +29,7 @@ public class ConnectionUtil {
         try {
             return DriverManager.getConnection(url, dbProperties);
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Can't establish the connection to DB", e);
+            throw new DataProcessingException("Can't establish the connection to DB", e);
         }
     }
 }

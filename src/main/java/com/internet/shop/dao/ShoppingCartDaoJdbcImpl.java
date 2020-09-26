@@ -1,6 +1,6 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.exceptions.DataBaseProcessingException;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Product;
 import com.internet.shop.models.ShoppingCart;
@@ -33,7 +33,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 return Optional.of(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping cart by user id" + userId
+            throw new DataProcessingException("Shopping cart by user id" + userId
                     + " was not found", e);
         }
         return Optional.empty();
@@ -52,7 +52,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 shoppingCart.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shoping cart "
+            throw new DataProcessingException("Shoping cart "
                     + shoppingCart + " was not created", e);
         }
         return shoppingCart;
@@ -75,7 +75,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 return Optional.of(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shoping cart "
+            throw new DataProcessingException("Shoping cart "
                     + shoppingCart + " was not created", e);
         }
         return Optional.empty();
@@ -96,7 +96,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 shoppingCarts.add(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping cart list was not created", e);
+            throw new DataProcessingException("Shopping cart list was not created", e);
         }
         return shoppingCarts;
     }
@@ -111,7 +111,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             preparedStatement.setString(2, shoppingCart.getId().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping " + shoppingCart
+            throw new DataProcessingException("Shopping " + shoppingCart
                     + " was not created updated", e);
         }
         deleteProductsInShoppingCart(shoppingCart.getId());
@@ -127,7 +127,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping cart is was not deleted", e);
+            throw new DataProcessingException("Shopping cart is was not deleted", e);
         }
     }
 
@@ -148,7 +148,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 products.add(product);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shoping cart "
+            throw new DataProcessingException("Shoping cart "
                     + id + " have problem which product list", e);
         }
         return products;
@@ -161,7 +161,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Shopping product in cart "
+            throw new DataProcessingException("Shopping product in cart "
                     + id + " was not deleted", e);
         }
     }
@@ -178,7 +178,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             }
             return shoppingCart;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Failed to add the products to"
+            throw new DataProcessingException("Failed to add the products to"
                     + shoppingCart, e);
         }
     }

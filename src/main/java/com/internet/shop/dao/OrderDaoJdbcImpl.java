@@ -1,6 +1,6 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.exceptions.DataBaseProcessingException;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Order;
 import com.internet.shop.models.Product;
@@ -31,7 +31,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("User's orders list"
+            throw new DataProcessingException("User's orders list"
                     + " was not created, user id: " + userId, e);
         }
         for (Order order : orders) {
@@ -53,7 +53,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 order.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Order with id "
+            throw new DataProcessingException("Order with id "
                     + order.getId() + " was not created", e);
         }
         return addProductsIntoOrder(order);
@@ -75,7 +75,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 return Optional.empty();
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Order with id "
+            throw new DataProcessingException("Order with id "
                     + id + " was not created", e);
         }
         getOrderProducts(order);
@@ -96,7 +96,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("All orders order list was not created", e);
+            throw new DataProcessingException("All orders order list was not created", e);
         }
         for (Order order : orders) {
             getOrderProducts(order);
@@ -119,7 +119,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Order is not deleted", e);
+            throw new DataProcessingException("Order is not deleted", e);
         }
     }
 
@@ -130,7 +130,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product list in order with id "
+            throw new DataProcessingException("Product list in order with id "
                     + id + " was not deleted", e);
         }
     }
@@ -148,7 +148,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.executeBatch();
             return order;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Failed to add "
+            throw new DataProcessingException("Failed to add "
                     + "the products to the order with id "
                     + order.getId(), e);
         }
@@ -171,7 +171,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 products.add(product);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Failed to add products"
+            throw new DataProcessingException("Failed to add products"
                     + " to the order eith id " + order.getId(), e);
         }
         order.setProducts(products);

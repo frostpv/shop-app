@@ -1,6 +1,6 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.exceptions.DataBaseProcessingException;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Role;
 import com.internet.shop.models.User;
@@ -43,7 +43,7 @@ public class UserDaoJdbcImpl implements UserDao {
             user.setRoles(roles);
             return Optional.of(user);
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("User by Login " + login
+            throw new DataProcessingException("User by Login " + login
                     + "is not found", e);
         }
     }
@@ -64,7 +64,7 @@ public class UserDaoJdbcImpl implements UserDao {
                 user.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("User is not created with login "
+            throw new DataProcessingException("User is not created with login "
                     + user.getLogin(), e);
         }
         setIdToRoles(user.getRoles());
@@ -97,7 +97,7 @@ public class UserDaoJdbcImpl implements UserDao {
             user.setRoles(roles);
             return Optional.of(user);
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("User by id " + id
+            throw new DataProcessingException("User by id " + id
                     + "is not found", e);
         }
     }
@@ -150,7 +150,7 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("cant to deleted", e);
+            throw new DataProcessingException("cant to deleted", e);
         }
     }
 

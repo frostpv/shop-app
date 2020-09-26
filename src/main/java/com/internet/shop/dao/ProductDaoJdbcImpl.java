@@ -1,6 +1,6 @@
 package com.internet.shop.dao;
 
-import com.internet.shop.exceptions.DataBaseProcessingException;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.models.Product;
 import com.internet.shop.util.ConnectionUtil;
@@ -30,7 +30,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product " + product + " was not created", e);
+            throw new DataProcessingException("Product " + product + " was not created", e);
         }
     }
 
@@ -46,7 +46,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Can`t get product with id " + id, e);
+            throw new DataProcessingException("Can`t get product with id " + id, e);
         }
     }
 
@@ -64,7 +64,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             preparedStatement.executeUpdate();
             return product;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product " + product + " not updated", e);
+            throw new DataProcessingException("Product " + product + " not updated", e);
         }
     }
 
@@ -76,7 +76,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Product with id - " + id + " not deleted", e);
+            throw new DataProcessingException("Product with id - " + id + " not deleted", e);
         }
     }
 
@@ -91,7 +91,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
                 products.add(fetchProduct(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("All products error", e);
+            throw new DataProcessingException("All products error", e);
         }
         return products;
     }
