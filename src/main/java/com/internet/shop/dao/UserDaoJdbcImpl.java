@@ -64,7 +64,8 @@ public class UserDaoJdbcImpl implements UserDao {
                 user.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("User is not create", e);
+            throw new DataBaseProcessingException("User is not created with login "
+                    + user.getLogin(), e);
         }
         setIdToRoles(user.getRoles());
         addRolesToUser(user);
