@@ -98,7 +98,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
         } catch (SQLException e) {
             throw new DataBaseProcessingException("Order list was not created", e);
         }
-
         for (Order order : orders) {
             getOrderProducts(order);
         }
