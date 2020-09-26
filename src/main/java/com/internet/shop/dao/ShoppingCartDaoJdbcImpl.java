@@ -104,9 +104,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart update(ShoppingCart shoppingCart) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "UPDATE shoping_cart "
-                    + "SET id_user = ? WHERE id_shoping_cart=? "
-                    + "AND deleted = FALSE";
+            String query = "UPDATE shoping_cart SET id_user = ?"
+                    + " WHERE id_shoping_cart=? AND deleted = FALSE";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, shoppingCart.getUserId());
             preparedStatement.setString(2, shoppingCart.getId().toString());
