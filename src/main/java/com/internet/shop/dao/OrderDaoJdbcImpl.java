@@ -171,8 +171,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 products.add(product);
             }
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Order "
-                    + order + " have problem which product list", e);
+            throw new DataBaseProcessingException("Failed to add products"
+                    + " to the order eith id " + order.getId(), e);
         }
         order.setProducts(products);
     }
