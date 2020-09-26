@@ -33,8 +33,9 @@ public class UserDaoJdbcImpl implements UserDao {
             if (resultSet.next()) {
                 user = setUserFields(resultSet);
                 roles.add(getRoleWichId(resultSet));
+            } else {
+                return Optional.empty();
             }
-
             while (resultSet.next()) {
                 roles.add(getRoleWichId(resultSet));
                 user.setRoles(roles);
@@ -117,6 +118,8 @@ public class UserDaoJdbcImpl implements UserDao {
             if (resultSet.next()) {
                 user = setUserFields(resultSet);
                 roles.add(getRoleWichId(resultSet));
+            } else {
+                return Optional.empty();
             }
             while (resultSet.next()) {
                 roles.add(getRoleWichId(resultSet));
