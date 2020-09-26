@@ -103,7 +103,6 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart update(ShoppingCart shoppingCart) {
-
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "UPDATE shoping_cart "
                     + "SET id_user = ? WHERE id_shoping_cart=? "
