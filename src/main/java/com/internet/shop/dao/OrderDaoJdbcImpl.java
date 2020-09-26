@@ -34,9 +34,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             throw new DataProcessingException("User's orders list"
                     + " was not created, user id: " + userId, e);
         }
-        for (Order order : orders) {
-            setOrderProductsFromDb(order);
-        }
+        orders.forEach(this::setOrderProductsFromDb);
         return orders;
     }
 
@@ -98,9 +96,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         } catch (SQLException e) {
             throw new DataProcessingException("All orders order list was not created", e);
         }
-        for (Order order : orders) {
-            setOrderProductsFromDb(order);
-        }
+        orders.forEach(this::setOrderProductsFromDb);
         return orders;
     }
 
