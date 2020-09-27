@@ -113,8 +113,8 @@ public class UserDaoJdbcImpl implements UserDao {
                 User user = setUserFields(resultSet);
                 users.add(user);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Cant get all list of users", e);
         }
         users.forEach(this::getUserRoles);
         return users;
