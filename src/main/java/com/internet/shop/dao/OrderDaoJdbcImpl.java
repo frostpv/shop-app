@@ -115,7 +115,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Order is not deleted", e);
+            throw new DataProcessingException("Order whit "
+                    + id + " is not deleted", e);
         }
     }
 

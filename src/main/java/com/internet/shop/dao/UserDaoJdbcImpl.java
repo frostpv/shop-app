@@ -150,7 +150,7 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("cant to deleted", e);
+            throw new DataProcessingException("cant to deleted user to id " + id, e);
         }
     }
 
