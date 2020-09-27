@@ -73,7 +73,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 return Optional.empty();
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get order with id "+ id, e);
+            throw new DataProcessingException("Can't get order with id " + id, e);
         }
         setOrderProductsFromDb(order);
         return Optional.of(order);
