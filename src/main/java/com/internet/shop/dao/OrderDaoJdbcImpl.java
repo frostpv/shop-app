@@ -93,7 +93,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("All orders order list was not created", e);
+            throw new DataProcessingException("Cant get all orders", e);
         }
         orders.forEach(this::setOrderProductsFromDb);
         return orders;
