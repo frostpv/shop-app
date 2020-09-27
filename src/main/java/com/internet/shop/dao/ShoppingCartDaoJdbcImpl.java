@@ -96,7 +96,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 shoppingCarts.add(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Shopping cart list was not created", e);
+            throw new DataProcessingException("Can't get all shoping carts", e);
         }
         return shoppingCarts;
     }
