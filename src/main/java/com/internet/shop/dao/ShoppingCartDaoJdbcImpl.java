@@ -75,8 +75,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 return Optional.of(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Shopping cart with "
-                    + id + " was not created", e);
+            throw new DataProcessingException("Can't get shopping cart with id "
+                    + id, e);
         }
         return Optional.empty();
     }
@@ -96,7 +96,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 shoppingCarts.add(shoppingCart);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get all shoping carts", e);
+            throw new DataProcessingException("Can't get all shopping carts", e);
         }
         return shoppingCarts;
     }

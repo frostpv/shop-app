@@ -73,7 +73,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 return Optional.empty();
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Cant get order with id "+ id, e);
+            throw new DataProcessingException("Can't get order with id "+ id, e);
         }
         setOrderProductsFromDb(order);
         return Optional.of(order);
@@ -93,7 +93,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Cant get all orders", e);
+            throw new DataProcessingException("Can't get all orders", e);
         }
         orders.forEach(this::setOrderProductsFromDb);
         return orders;
