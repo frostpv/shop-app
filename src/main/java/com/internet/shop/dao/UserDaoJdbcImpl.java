@@ -124,7 +124,7 @@ public class UserDaoJdbcImpl implements UserDao {
     public User update(User user) {
         String query = "UPDATE users "
                 + "SET user_name = ?, user_login = ?, user_pass = ? "
-                + "WHERE user_id = ?";
+                + "WHERE user_id = ? AND deleted != true";
         try (PreparedStatement preparedStatement =
                      ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, user.getName());
