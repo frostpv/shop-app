@@ -20,8 +20,6 @@ import java.util.Set;
 public class UserDaoJdbcImpl implements UserDao {
     @Override
     public Optional<User> findByLogin(String login) {
-        User user;
-        Set<Role> roles = new HashSet<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users"
                     + " JOIN user_roles ON user_roles.user_id = users.user_id"
@@ -30,18 +28,7 @@ public class UserDaoJdbcImpl implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = setUserFields(resultSet);
-                roles.add(getRolesWithId(resultSet));
-            } else {
-                return Optional.empty();
-            }
-            while (resultSet.next()) {
-                roles.add(getRolesWithId(resultSet));
-                user.setRoles(roles);
-            }
-            user.setRoles(roles);
-            return Optional.of(user);
+            return Optional.ofNullable(createUserObject(resultSet));
         } catch (SQLException e) {
             throw new DataProcessingException("User by Login " + login
                     + "is not found", e);
@@ -74,8 +61,6 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> get(Long id) {
-        User user;
-        Set<Role> roles = new HashSet<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users "
                     + " JOIN user_roles ON users.user_id = user_roles.user_id"
@@ -84,18 +69,7 @@ public class UserDaoJdbcImpl implements UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = setUserFields(resultSet);
-                roles.add(getRolesWithId(resultSet));
-            } else {
-                return Optional.empty();
-            }
-            while (resultSet.next()) {
-                roles.add(getRolesWithId(resultSet));
-                user.setRoles(roles);
-            }
-            user.setRoles(roles);
-            return Optional.of(user);
+            return Optional.ofNullable(createUserObject(resultSet));
         } catch (SQLException e) {
             throw new DataProcessingException("User by id " + id
                     + "is not found", e);
@@ -230,4 +204,22 @@ public class UserDaoJdbcImpl implements UserDao {
             + user.getId(), e);
         }
     }
+
+    private User createUserObject(ResultSet resultSet) throws SQLException {
+        User user;
+        Set<Role> roles = new HashSet<>();
+        if (resultSet.next()) {
+            user = setUserFields(resultSet);
+            roles.add(getRolesWithId(resultSet));
+        } else {
+            return null;
+        }
+        while (resultSet.next()) {
+            roles.add(getRolesWithId(resultSet));
+            user.setRoles(roles);
+        }
+        user.setRoles(roles);
+        return user;
+    }
+
 }
