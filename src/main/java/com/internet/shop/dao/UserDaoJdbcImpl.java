@@ -135,8 +135,6 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        deleteUserRoles(user.getId());
-        setIdToRoles(user.getRoles());
         addRolesToUser(user);
         return user;
     }
