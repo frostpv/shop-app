@@ -148,7 +148,7 @@ public class UserDaoJdbcImpl implements UserDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("cant to deleted user to id " + id, e);
+            throw new DataProcessingException("cant to deleted user with id " + id, e);
         }
     }
 
@@ -158,8 +158,9 @@ public class UserDaoJdbcImpl implements UserDao {
                      ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Cant delete roles to user "
+                    + id,e);
         }
     }
 
@@ -190,8 +191,8 @@ public class UserDaoJdbcImpl implements UserDao {
                     }
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't get list of roles from data", e);
         }
     }
 
@@ -207,8 +208,9 @@ public class UserDaoJdbcImpl implements UserDao {
             while (resultSet.next()) {
                 roles.add(getRolesWithId(resultSet));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't get user roles to user id "
+                    + user.getId(), e);
         }
         user.setRoles(roles);
     }
@@ -223,8 +225,9 @@ public class UserDaoJdbcImpl implements UserDao {
                 preparedStatement.addBatch();
             }
             preparedStatement.executeBatch();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't add roles to user "
+            + user.getId(), e);
         }
     }
 }
