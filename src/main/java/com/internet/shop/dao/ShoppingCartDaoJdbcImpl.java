@@ -162,7 +162,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Product in cart "
+            throw new DataProcessingException("Products in cart "
                     + id + " was not deleted", e);
         }
     }
