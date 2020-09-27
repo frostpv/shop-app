@@ -154,12 +154,11 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         return products;
     }
 
-    private boolean deleteProductsInShoppingCart(Long id) {
+    private void deleteProductsInShoppingCart(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "DELETE FROM shoping_cart_products WHERE id_cart = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
-            return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Products in cart "
                     + id + " was not deleted", e);
