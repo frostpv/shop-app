@@ -149,8 +149,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
                 products.add(product);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Shopping cart "
-                    + id + " have problem which product list", e);
+            throw new DataProcessingException("Can't get  "
+                    + " product list of cart with id " + id, e);
         }
         return products;
     }
