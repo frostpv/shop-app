@@ -20,7 +20,7 @@ import java.util.Set;
 public class UserDaoJdbcImpl implements UserDao {
     @Override
     public Optional<User> findByLogin(String login) {
-        User user = new User();
+        User user;
         Set<Role> roles = new HashSet<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users"
@@ -74,7 +74,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> get(Long id) {
-        User user = new User();
+        User user;
         Set<Role> roles = new HashSet<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users "
