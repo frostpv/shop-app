@@ -1,6 +1,6 @@
 package com.internet.shop.util;
 
-import com.internet.shop.exceptions.DataBaseProcessingException;
+import com.internet.shop.exceptions.DataProcessingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ public class ConnectionUtil {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "1234";
     private static final String URL
-            = "jdbc:mysql://localhost:3306/internet_shop?serverTimezone=UTC";
+            = "jdbc:mysql://localhost:3306/shop?serverTimezone=UTC";
 
     static {
         try {
@@ -29,7 +29,7 @@ public class ConnectionUtil {
         try {
             return DriverManager.getConnection(url, dbProperties);
         } catch (SQLException e) {
-            throw new DataBaseProcessingException("Can't establish the connection to DB", e);
+            throw new DataProcessingException("Can't establish the connection to DB", e);
         }
     }
 }
