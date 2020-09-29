@@ -41,7 +41,7 @@ public class RegistrationController extends HttpServlet {
             user.setLogin(login);
             byte[] salt = HashUtil.getSalt();
             user.setSalt(salt);
-            user.setPassword(HashUtil.hashPassword(user.getPassword(), salt));
+            user.setPassword(HashUtil.hashPassword(psw, salt));
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(Role.of("USER"));
             user.setRoles(roleSet);
