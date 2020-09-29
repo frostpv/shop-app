@@ -7,7 +7,6 @@ import com.internet.shop.models.User;
 import com.internet.shop.services.ShoppingCartService;
 import com.internet.shop.services.UserService;
 import com.internet.shop.util.HashUtil;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
