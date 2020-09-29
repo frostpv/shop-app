@@ -7,6 +7,7 @@ public class User {
     private String name;
     private String login;
     private String password;
+    private byte[] salt;
     private Set<Role> roles;
 
     public User() {
@@ -16,6 +17,14 @@ public class User {
         this.name = name;
         this.login = login;
         this.password = password;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 
     public Set<Role> getRoles() {
