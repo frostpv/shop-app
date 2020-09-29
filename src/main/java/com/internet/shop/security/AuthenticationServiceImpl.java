@@ -20,7 +20,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 && isValid(userFromDb.get().getPassword(), password, userFromDb.get().getSalt())) {
             return userFromDb.get();
         }
-
         throw new AuthenticationException("Incorrect user name or password");
     }
 
