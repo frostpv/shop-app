@@ -1,5 +1,7 @@
 package com.internet.shop.util;
 
+import com.internet.shop.exceptions.HashCreateException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -23,9 +25,8 @@ public class HashUtil {
             for (byte b : digest) {
                 hashedPassword.append(String.format("%02x", b));
             }
-
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            throw new HashCreateException("Password hashing failed", e);
         }
         return hashedPassword.toString();
     }
