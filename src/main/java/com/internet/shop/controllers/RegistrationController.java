@@ -6,6 +6,8 @@ import com.internet.shop.models.ShoppingCart;
 import com.internet.shop.models.User;
 import com.internet.shop.services.ShoppingCartService;
 import com.internet.shop.services.UserService;
+import com.internet.shop.util.HashUtil;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +36,12 @@ public class RegistrationController extends HttpServlet {
         String psw = req.getParameter("psw");
         String pswRepeat = req.getParameter("psw-repeat");
         if (psw.equals(pswRepeat)) {
-            User user = new User(name, login, psw);
+            User user = new User();
+            user.setName(name);
+            user.setLogin(login);
+            byte[] salt = HashUtil.getSalt();
+            user.setSalt(salt);
+            user.setPassword(HashUtil.hashPassword(user.getPassword(), salt));
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(Role.of("USER"));
             user.setRoles(roleSet);
