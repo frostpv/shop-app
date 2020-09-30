@@ -90,3 +90,5 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'Igor','Igor','123',1),(2,'Admin','Admin','123',0),(3,'Laci','Laci','123',1),(4,'Max','Max','123',0),(5,'Dima','Dima','123',0),(6,'Mika','Mika','123',0),(7,'Igor','Igor','123',1);
 UNLOCK TABLES;
+ALTER TABLE `shop`.`users`
+ADD COLUMN `salt` VARBINARY(16) AFTER `deleted`;

@@ -37,14 +37,15 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        String query = "INSERT INTO users (user_name, user_login, user_pass) "
-                + "VALUES (?, ?, ?)";
+        String query = "INSERT INTO users (user_name, user_login, user_pass, salt) "
+                + "VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query,
                 Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setBytes(4, user.getSalt());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -97,14 +98,15 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public User update(User user) {
         String query = "UPDATE users "
-                + "SET user_name = ?, user_login = ?, user_pass = ? "
+                + "SET user_name = ?, user_login = ?, user_pass = ? salt = ?"
                 + "WHERE user_id = ? AND deleted != true";
         try (PreparedStatement preparedStatement =
                      ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setLong(4, user.getId());
+            preparedStatement.setBytes(4, user.getSalt());
+            preparedStatement.setLong(5, user.getId());
             preparedStatement.executeQuery();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -144,6 +146,7 @@ public class UserDaoJdbcImpl implements UserDao {
         user.setName(resultSet.getString("user_name"));
         user.setLogin(resultSet.getString("user_login"));
         user.setPassword(resultSet.getString("user_pass"));
+        user.setSalt(resultSet.getBytes("salt"));
         return user;
     }
 
