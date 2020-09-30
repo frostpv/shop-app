@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         throw new AuthenticationException("Incorrect user name or password");
     }
 
-    private static boolean isValid(User user, String password) {
+    private boolean isValid(User user, String password) {
         return user.getPassword().equals(HashUtil.hashPassword(password, user.getSalt()));
     }
 }
